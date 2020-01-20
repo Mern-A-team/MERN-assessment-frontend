@@ -1,0 +1,15 @@
+@import '../../main.scss';
+
+#root {
+    div {
+        .formContainer {
+            form {
+                .fieldset {
+                    select {
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+}
