@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import StaticNav from '../components/navigation/staticnav.component'
-import '../styles/pages/landing.page.scss'
+import '../styles/pages/categories.page.scss'
 
-export default class Landing extends Component {
+export default class Categories extends Component {
   render() {
     return (
       <>
         <StaticNav />
-        <h1>This is the Landing page.</h1>
+        <h1>This is the Categories page.</h1>
       </>
     )
   }
 }
+

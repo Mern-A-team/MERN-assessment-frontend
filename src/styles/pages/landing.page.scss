@@ -1,0 +1,13 @@
+@import '../main.scss';
+@import '../buttons/landing_login.style.scss';
+
+#landingPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 100%;
+    #landingTitle, #landingSubtitle {
+        text-align: center;
+    }
+}

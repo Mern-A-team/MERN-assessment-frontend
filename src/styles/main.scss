@@ -1,7 +1,10 @@
-@import './navigation/navbar.style.scss';
-@import './buttons/landing_login.style.scss';
-@import './landing.page.scss';
+@use "sass:map";
 
-#root {
-    background-color: red;
-}
+$theme-colors: (
+  "success": #28a745,
+  "info": #17a2b8,
+  "warning": #ffc107,
+);
+
+$fonts: 'Open Sans', sans-serif;
+
