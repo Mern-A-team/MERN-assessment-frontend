@@ -1,0 +1,35 @@
+@import '../../main.scss';
+
+#root {
+    div {
+        .formContainer {
+            max-width: 300px;
+            margin: auto;
+            .pageHeading {
+                margin: 5px;
+                text-align: center;
+                color: map-get($theme-colors , "light-grey" );
+            }
+            form {
+                @include standard-padding;
+                border-radius: 5px;
+                background-color: map-get($theme-colors , "grey" );
+
+                .fieldset {
+                    @include flex-c;
+                    @include font-medium;
+                    padding: 5px;
+                    input {
+                        font-size: inherit;
+                    }
+                    #submitButton {
+                        font-size: 1.2rem;
+                        height: 40px;
+                        width: 100px;
+                        margin: auto;
+                    }
+                }
+            }
+        }
+    }
+}

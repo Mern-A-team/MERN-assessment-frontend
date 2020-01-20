@@ -1,10 +1,47 @@
 @use "sass:map";
 
 $theme-colors: (
-  "success": #28a745,
+  "light-grey": #E4E4E4,
+  "grey": #C4C4C4,
+  "dark-grey": #9E9E9E,
+
+  "background": #444554,
+  "nav-bar": #2C2C36,
+  "nav-icon": #AFAFAF,
+
+  "link-light": #1D6790,
+  "text-grey": #5A5A5A,
+  "text-dark-grey": #313131,
+
+  "success": rgba(203, 255, 163, 0.75),
   "info": #17a2b8,
   "warning": #ffc107,
 );
 
 $fonts: 'Open Sans', sans-serif;
 
+@mixin standard-padding {
+  padding: 20px;
+}
+
+@mixin input-desktop {
+  height: 50px;
+}
+
+@mixin flex-r {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-c {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin font-medium {
+  font-size: 1.5rem;
+}
+
+body {
+  background-color: map-get($theme-colors , "background" );
+}
