@@ -1,0 +1,74 @@
+@import '../../main.scss';
+
+#root {
+   margin-left: 50px;
+   div {
+      #sidenav {
+         @include flex-c;
+         justify-content: space-between;
+         align-items: center;
+         position: fixed;
+         height: 100%;
+         width: 50px;
+         overflow-x: hidden;
+         z-index: 1;
+         top: 0px;
+         left: 0px;
+         background-color: map-get($theme-colors , "nav-bar" );
+         box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.596);
+         #sidenavTop {
+            @include flex-c;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            i {
+               margin: 20px 0px;
+               position: relative;
+            }
+         }
+         #sidenavMiddle {
+            i {
+               position: relative;
+               left: -10px;
+               transition-duration: .5s;
+               color: map-get($theme-colors , "light-grey" );
+            }
+            input[type='checkbox'] {
+               position: relative;
+               left: 15px;
+               bottom: 4px;
+               z-index: 2;
+               transform: scale(2.5);
+               opacity: 0;
+            }
+         }
+         #sidenavBottom {
+            @include flex-c;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            i {
+               margin: 20px 0px;
+            }
+            
+         }
+         .sidenavContainer {
+            color: map-get($theme-colors , "light-grey" );
+            a {
+               color: #E4E4E4;
+            }
+         }
+      }
+      #extendednav {
+         position: fixed;
+         height: 100%;
+         width: 150px;
+         overflow-x: hidden;
+         z-index: 0;
+         top: 0px;
+         left: -100px;
+         background-color: grey;
+         transition-duration: .5s;
+      }
+   }
+}
