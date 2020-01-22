@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import StaticNav from '../components/navigation/staticnav.component'
+import SideNav from '../components/navigation/navbar.component'
 import '../styles/pages/landing.page.scss'
 
 export default class Landing extends Component {
@@ -8,6 +9,7 @@ export default class Landing extends Component {
       <>
         <StaticNav />
         <h1>This is the Landing page.</h1>
+        <SideNav />
       </>
     )
   }
