@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 
 import SubmitButton from '../buttons/standard_button.component'
 
 export default class LoginForm extends Component {
+    constructor() {
+        super()
+        this.state = {
+            options: []
+        }
+    }
   render() {
 
    let data = [
@@ -46,47 +53,96 @@ export default class LoginForm extends Component {
   // Calls the populateList function and passes in the data to be mapped.
   populateList(data)
 
-//   let filter = []
   let relations = []
 
   function findParent(x) {
      console.log(x)
       let parent = x.parent
       if (parent !== "All") {
-         relations.push(parent)
+          if (!relations.includes(parent)) {
+              relations.unshift(parent)
+          }
+          else {
+              relations.splice(relations.indexOf(parent), 1)
+              relations.unshift(parent)
+          }
          let newParent = data.find(x => x.name === parent)
          findParent(newParent)
       }
    }
 
-   function addFilter() {
+   const addFilter = () => {
       let selection = document.getElementsByTagName("select")[0].value
+      debugger
+      document.getElementById("select-warning").innerHTML = ""
+    if (selection !== "All") {
+        let output = selection.trim()
+        if (!relations.includes(output)) {
+            relations.unshift(output)
 
-      if (selection !== "All") {
-         let output = selection.trim()
-         relations.push(output)
-         let category = data.find(x => x.name === output)
-         findParent(category)
+            let category = data.find(x => x.name === output)
+            findParent(category)
+            
+        }
+        else {
+            document.getElementById("select-warning").innerHTML = "This category has already been added as a filter."
+            // relations.splice(relations.indexOf(output))
+            // relations.unshift(output)
+        }    
+    }
+    else {
+        relations = []
+    }
          // filters.push(output)
          
+        //  let categories = relations
+
+        // let tags = []
+
          let filter = relations.reverse()
          let final = filter.join(" > ")
-         document.getElementById("filterContainer").innerHTML = `${final}`
-      }
-   }
+        //  tags.push(final)
+         document.getElementById("filterContainer").innerHTML = `${relations}`
+
+            //  instead of a new element on the page, we'll be copying the current options state
+        //and adding the selected option to the list of options
+
+        let newOptions = [...this.state.options, final ]
+
+        this.setState({options: newOptions})
+         
+        //  let tag = React.createElement("div", { id: "tag-test" }, `this is a tag: ${tags}`)
+        //  ReactDOM.render(
+            //  tags,
+            //  document.getElementById("select-warning")
+        //  )
+        //  final = []
+         filter = []
+    }
+
+
+    //instead of a new element on the page, we'll be copying the current options state
+    //and adding the selected option to the list of options
+
+    // let newOptions = [...options, final ]
+
+    //this.setState({options: newOptions})
 
     return (
         <div id="searchFilters" className="searchContainer">
             <h1 className="pageHeading" data-cy="searchFormHeading">Search Form</h1>
             <form>
 
-                <div id="filterContainer">
-                    
-                </div>
-                     <select name="categoryList" form="addCategory" defaultValue="All" onChange={addFilter}>
+                {this.state.options && <FilterContainer elements={this.state.options} /> }
+
+                <select name="categoryList" form="addCategory" defaultValue="All" onChange={addFilter}>
                         <option className="option" value="All">No Parent Category</option>
                         {options.map(opt => <option className="option">{opt}</option>)}
-                     </select>
+                </select>
+                <div id="select-warning">
+
+                </div>
+
                 <div className="fieldset">
                     <SubmitButton />
                 </div>
@@ -95,4 +151,16 @@ export default class LoginForm extends Component {
         </div>
     )
   }
+}
+
+function FilterContainer({elements}) {
+    return (
+        <div id='filterContainer'>
+            {elements.map(element => (
+                <React.Fragment>
+                    <p style={{display: "inline"}}>{element}</p><button>X</button>
+                </React.Fragment>
+            ))}
+        </div>
+    )
 }
