@@ -1,98 +1,136 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
+import '../../styles/components/forms/searchFilters.style.scss'
 
-import SubmitButton from '../buttons/standard_button.component'
+export default function SearchFilters() {
+    const [data] = useState([
+        { parent: "All", name: "Landscapes" },
+        { parent: "All", name: "People"},
+        { parent: "People", name: "General MacArthur"},
+        { parent: "All", name: "Year" },
+        { parent: "Year", name: "40s" },
+        { parent: "40s", name: "1942" }
+    ])
+    const [tags, setTags] = useState([])
+    const [options, setOptions] = useState([])
+    const [formCategories, setFormCategories] = useState([])
+    const [tagError, setTagError] = useState("")
 
-export default class LoginForm extends Component {
-  render() {
+    useEffect(() => {
+        let list = populateList(data)
+        setOptions(list)
+    }, [])
 
-   let data = [
-      { parent: "All", name: "Landscapes" },
-      { parent: "All", name: "People"},
-      { parent: "People", name: "General MacArthur"},
-      { parent: "All", name: "Year" },
-      { parent: "Year", name: "40s" },
-      { parent: "40s", name: "1942" }
-  ]
+    useEffect(() => {
+        populateTags(data)
+    },)
 
-  // Populates a string that is used for each option in the "Select Category" dropdown list.
-  // Passes data as an array of objects, sets the top level parent and the default level of indentation.
-  function populateList(data, parent="All", level=0) {
-      // assigns x as all items that have the parent parameter as their parent. 
-      const x = data.filter(item => item.parent === parent)
-      // if the parent is "All", push the element name to options and call the function again.
-      if (parent === "All") {
-          x.forEach((element, index) => {
-              options.push(`${element.name}`)
-              populateList(data, element.name)                
-          });
-      // This will run if the parent isn't "All"
-      } else {
-          // For each element that isn't top level, add a space by default and another for each level of indentation.
-          x.forEach((element, index) => {
-              let space = "\u00A0\u00A0"
-              for (let i=0; i < level; i++) {
-                  space += "\u00A0\u00A0"
-              }
-              // Push the element name with the appropriate indentation.
-              options.push(`${space}${element.name}`)
-              // Call the function again but pass in the element's name as the parent and add a level of indentation.
-              populateList(data, element.name, level+1)
-          })
-      }
-  }
+    function findChildren(current, tag, data, formlist) {
+            tag.push(current)
+            if (data.find(element => element.parent === current)) {
+                let newCategory = data.find(element => element.parent === current)
+                console.log(newCategory)
+                findChildren(newCategory.name, tag, data, formlist)
+            }
+            else {
+                console.log(tag)
+                let stringtag = tag.join(" > ")
+                tag.forEach(element => {
+                    let position = formlist.indexOf(element)
+                    formlist.splice(position, 1)
+                })
+                console.log(stringtag)
+        }
+    }
 
-  // Sets the empty array for options to be mapped.
-  let options = []
-  // Calls the populateList function and passes in the data to be mapped.
-  populateList(data)
+    function setTag(formlist, data) {
+        formlist.forEach(e => {
+            let tag = []
+            findChildren(e, tag, data, formlist)
+            console.log(tag)
+            tag = []
+        })
+    }
 
-//   let filter = []
-  let relations = []
+    function populateTags(data) {
+        let formlist = [...formCategories]
 
-  function findParent(x) {
-     console.log(x)
-      let parent = x.parent
-      if (parent !== "All") {
-         relations.push(parent)
-         let newParent = data.find(x => x.name === parent)
-         findParent(newParent)
-      }
-   }
+        setTag(formlist, data)
+    }
 
-   function addFilter() {
-      let selection = document.getElementsByTagName("select")[0].value
-
-      if (selection !== "All") {
-         let output = selection.trim()
-         relations.push(output)
-         let category = data.find(x => x.name === output)
-         findParent(category)
-         // filters.push(output)
-         
-         let filter = relations.reverse()
-         let final = filter.join(" > ")
-         document.getElementById("filterContainer").innerHTML = `${final}`
+    function findParent(category, formcategories) {
+        let parent = category.parent
+        if (parent !== "All") {
+            if (!formcategories.includes(parent)) {
+              formcategories.unshift(parent)
+            }
+            else {
+              formcategories.splice(formcategories.indexOf(parent), 1)
+              formcategories.unshift(parent)
+            }
+        let newParent = data.find(x => x.name === parent)
+        findParent(newParent, formcategories)
       }
    }
+
+    const setFilters = () => {
+        let formcategories = [...formCategories]
+        let selection = document.getElementsByTagName("select")[0].value
+        let trimmed = selection.trim()
+        setTagError("")
+        if (trimmed === "All") {
+            formcategories = []
+        } else if (formcategories.includes(trimmed)) {
+            setTagError("This tag already exists")
+        } else {
+            formcategories.unshift(trimmed)
+            let category = data.filter(element => element.name === trimmed)[0]
+            findParent(category, formcategories)
+        }
+        setFormCategories(formcategories)
+    }
+
+    // Populates a string that is used for each option in the "Select Category" dropdown list.
+    // Passes data as an array of objects, sets the top level parent and the default level of indentation.
+    function populateList(data, list=[], parent="All", level=0) {
+        // assigns x as all items that have the parent parameter as their parent. 
+        const x = data.filter(item => item.parent === parent)
+        // if the parent is "All", push the element name to options and call the function again.
+        if (parent === "All") {
+            x.forEach(element => {
+              list.push(element.name)
+              list = populateList(data, list, element.name)                
+            });
+        // This will run if the parent isn't "All"
+        } else {
+            // For each element that isn't top level, add a space by default and another for each level of indentation.
+            x.forEach(element => {
+                let space = "\u00A0\u00A0"
+                for (let i=0; i < level; i++) {
+                    space += "\u00A0\u00A0"
+                }
+            // Push the element name with the appropriate indentation.
+            //   setOptions([...options, `${space}${element.name}` ])
+            // Call the function again but pass in the element's name as the parent and add a level of indentation.
+                list.push(space + element.name)
+                list = populateList(data, list, element.name, level+1)
+            })
+        }
+        return list
+    }
+
 
     return (
-        <div id="searchFilters" className="searchContainer">
-            <h1 className="pageHeading" data-cy="searchFormHeading">Search Form</h1>
-            <form>
-
-                <div id="filterContainer">
-                    
-                </div>
-                     <select name="categoryList" form="addCategory" defaultValue="All" onChange={addFilter}>
-                        <option className="option" value="All">No Parent Category</option>
-                        {options.map(opt => <option className="option">{opt}</option>)}
-                     </select>
-                <div className="fieldset">
-                    <SubmitButton />
-                </div>
-
-            </form>
-        </div>
+        <>
+            <div id="tagContainer">
+               {tags && tags.map(t => <div id="tags">{t}</div>)} 
+            </div>
+            <select name="categoryList" form="addCategory" defaultValue="All" onChange={setFilters}>
+                <option className="option" value="All">No Parent Category</option>
+                {options.map(opt => <option className="option">{opt}</option>)}
+            </select>
+            <div id="tagErrorDiv">
+                {tagError}
+            </div>
+        </>
     )
-  }
 }
