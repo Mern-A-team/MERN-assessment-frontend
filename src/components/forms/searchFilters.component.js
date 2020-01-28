@@ -22,43 +22,53 @@ export default function SearchFilters() {
 
     useEffect(() => {
         populateTags(data)
-    },)
+    }, [formCategories])
 
     function findChildren(current, tag, data, formlist) {
+            console.log(`this is the current category: ${current}`)
             tag.push(current)
             if (data.find(element => element.parent === current)) {
                 let newCategory = data.find(element => element.parent === current)
-                console.log(newCategory)
+                console.log(`this is the newCategory: ${newCategory}`)
+                if (formlist.includes(newCategory.name)) {
                 findChildren(newCategory.name, tag, data, formlist)
+                }
             }
-            else {
-                console.log(tag)
+                console.log(`this is the tag before join: ${tag}`)
                 let stringtag = tag.join(" > ")
+                console.log(`this is the stringtag: ${stringtag}`)
+                let stringtaglist = [...tags]
+                console.log(`This should be existing tags: ${stringtaglist}`)
                 tag.forEach(element => {
-                    let position = formlist.indexOf(element)
-                    formlist.splice(position, 1)
+                    let matches = stringtaglist.filter(x => x.includes(element))
+                    console.log(`This matches the string: ${matches}`)
+                    let index = stringtaglist.indexOf(matches[0])
+                    console.log(`stringtaglist: ${stringtaglist}`)
+                    console.log(`index: ${index}`)
+                    if (matches.length) stringtaglist.splice(index, 1)
                 })
-                console.log(stringtag)
-        }
+                stringtaglist.unshift(stringtag)
+                console.log(`this should only have unique strings: ${stringtaglist}`)
+                setTags(stringtaglist.filter(e => e))
     }
 
     function setTag(formlist, data) {
-        formlist.forEach(e => {
+        // for each element in formlist
             let tag = []
-            findChildren(e, tag, data, formlist)
-            console.log(tag)
-            tag = []
-        })
+            let element = formlist[0]
+            findChildren(element, tag, data, formlist)
+            console.log(`this is the new formlist: ${formlist}`)
     }
 
     function populateTags(data) {
         let formlist = [...formCategories]
-
+        console.log(`the formlist for populatetags: ${formlist}`)
         setTag(formlist, data)
     }
 
     function findParent(category, formcategories) {
         let parent = category.parent
+        console.log(`this is the category's parent: ${parent}`)
         if (parent !== "All") {
             if (!formcategories.includes(parent)) {
               formcategories.unshift(parent)
@@ -68,6 +78,7 @@ export default function SearchFilters() {
               formcategories.unshift(parent)
             }
         let newParent = data.find(x => x.name === parent)
+        console.log(`this is the new parent: ${newParent}`)
         findParent(newParent, formcategories)
       }
    }
@@ -76,14 +87,18 @@ export default function SearchFilters() {
         let formcategories = [...formCategories]
         let selection = document.getElementsByTagName("select")[0].value
         let trimmed = selection.trim()
+        console.log(`this is the selection: ${trimmed}`)
         setTagError("")
         if (trimmed === "All") {
             formcategories = []
+            setTags([])
         } else if (formcategories.includes(trimmed)) {
             setTagError("This tag already exists")
         } else {
             formcategories.unshift(trimmed)
+            console.log(`selection at the start of formcategories: ${formcategories}`)
             let category = data.filter(element => element.name === trimmed)[0]
+            console.log(`this is the category: ${category}`)
             findParent(category, formcategories)
         }
         setFormCategories(formcategories)
@@ -122,7 +137,7 @@ export default function SearchFilters() {
     return (
         <>
             <div id="tagContainer">
-               {tags && tags.map(t => <div id="tags">{t}</div>)} 
+               {tags.map(t => <div id="tags">{t}</div>)} 
             </div>
             <select name="categoryList" form="addCategory" defaultValue="All" onChange={setFilters}>
                 <option className="option" value="All">No Parent Category</option>
