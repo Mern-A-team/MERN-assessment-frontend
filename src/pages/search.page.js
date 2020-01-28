@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import SearchFilters from '../components/forms/searchFilters.component'
+import SearchForm from '../components/forms/searchForm.component'
+
 import SideNav from '../components/navigation/navbar.component'
 import StaticNav from '../components/navigation/staticnav.component'
 import '../styles/pages/search.page.scss'
@@ -11,7 +12,7 @@ export default class Search extends Component {
         <SideNav />
         <StaticNav />
         <h1>This is the Search page.</h1>
-        <SearchFilters />
+        <SearchForm />
       </>
     )
   }

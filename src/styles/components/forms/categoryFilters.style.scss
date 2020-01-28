@@ -1,0 +1,45 @@
+@import '../../main.scss';
+
+#root {
+   div {
+      #searchContainer {
+         #searchInput {
+            font-size: 1.2rem;
+            padding: 5px;
+            width: 90%;
+            max-width: 500px;
+         }
+         div#tagContainer {
+            display: flex;
+            flex-wrap: wrap;
+            #tags {
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               background-color: lightgrey ;
+               padding: 5px 10px;
+               margin: 5px 5px 5px 0px;
+               border-radius: 5px;
+               // border: 1px solid black;
+               box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+               a {
+                  color: map-get($theme-colors , "warning" );;
+                  i {
+                     margin-left: 5px;
+                  }
+               }
+            }
+         }
+         #tagErrorDiv {
+            color: map-get($theme-colors , "warning" );;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.445);
+            text-decoration: underline;
+            margin-top: 2px;
+         }
+         #categorySelect {
+            font-size: 1.2rem;
+            padding: 5px;
+         }
+      }
+   }
+}

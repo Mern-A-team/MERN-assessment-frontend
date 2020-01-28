@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route } from "react-router-dom";
 
+import axios from 'axios'
+
 import LandingPage from './pages/landing.page'
 import LoginPage from './pages/login.page'
 import DashboardPage from './pages/dashboard.page'
@@ -17,6 +19,13 @@ import CategoriesPage from './pages/categories.page'
 import './styles/main.scss'
 
 export default class App extends Component {
+
+  componentDidMount() {
+    axios.get("https://peaceful-beach-89144.herokuapp.com/")
+      .then(res => console.log(res.data.message))
+      .catch(err => console.log(err))
+  }
+
   render() {
     return (
       <>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import '../../styles/components/forms/searchFilters.style.scss'
+import '../../styles/components/forms/categoryFilters.style.scss'
 
 export default function SearchFilters() {
     const [data] = useState([
@@ -134,12 +134,30 @@ export default function SearchFilters() {
     }
 
 
+    const removeTag = (index) => {
+        let formlist = [...formCategories]
+        let taglist = [...tags]
+        let item = taglist[index]
+        console.log(`removing item: ${item}`)
+        taglist.splice(index, 1) 
+        let split = item.split(" > ")
+        console.log(`this is split ${split}`)
+        split.forEach(element => {
+            let formindex = formlist.indexOf(element)
+            formlist.splice(formindex, 1)
+            console.log(`${element} should not be in ${formlist}`)
+        })
+        setFormCategories(formlist)
+        setTags(taglist)
+    }
+
     return (
         <>
+            <h2>Category Filters</h2>
             <div id="tagContainer">
-               {tags.map(t => <div id="tags">{t}</div>)} 
+               {tags.map((t,i) => <div id="tags">{t}<a href="#" onClick={() => removeTag(i)}><i class="fas fa-times"></i></a></div>)} 
             </div>
-            <select name="categoryList" form="addCategory" defaultValue="All" onChange={setFilters}>
+            <select id="categorySelect" name="categoryList" form="addCategory" defaultValue="All" onChange={setFilters}>
                 <option className="option" value="All">No Parent Category</option>
                 {options.map(opt => <option className="option">{opt}</option>)}
             </select>
