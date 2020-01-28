@@ -10,9 +10,9 @@ export default class Search extends Component {
     return (
       <>
         <SideNav />
-        <StaticNav />
-        <h1>This is the Search page.</h1>
+        <div id="main">
         <SearchForm />
+        </div>
       </>
     )
   }

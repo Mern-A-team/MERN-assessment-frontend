@@ -153,7 +153,6 @@ export default function SearchFilters() {
 
     return (
         <>
-            <h2>Category Filters</h2>
             <div id="tagContainer">
                {tags.map((t,i) => <div id="tags">{t}<a href="#" onClick={() => removeTag(i)}><i class="fas fa-times"></i></a></div>)} 
             </div>
