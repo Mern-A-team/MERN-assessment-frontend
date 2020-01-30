@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+
+import AddPhotoForm from '../components/forms/addPhotoForm.component'
 import SideNav from '../components/navigation/navbar.component'
-import StaticNav from '../components/navigation/staticnav.component'
 import '../styles/pages/addphoto.page.scss'
 
 export default class AddPhoto extends Component {
@@ -8,8 +9,7 @@ export default class AddPhoto extends Component {
     return (
       <>
         <SideNav />
-        <StaticNav />
-        <h1>This is the Add Photo page.</h1>
+        <AddPhotoForm />
       </>
     )
   }

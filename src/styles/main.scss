@@ -21,11 +21,11 @@ $theme-colors: (
 $fonts: 'Open Sans', sans-serif;
 
 @mixin standard-padding {
-  padding: 20px;
+  padding: 10px;
 }
 
 @mixin input-desktop {
-  height: 50px;
+  height: 30px;
 }
 
 @mixin flex-r {
@@ -39,7 +39,7 @@ $fonts: 'Open Sans', sans-serif;
 }
 
 @mixin font-medium {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 body {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import CategoryFilters from './categoryFilters.component'
 import '../../styles/components/forms/categoryFilters.style.scss'
 

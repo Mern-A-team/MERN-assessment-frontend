@@ -2,6 +2,9 @@
 
 #root {
     div {
+        #loginFormContainer {
+            margin-top: 30vh;
+        }
         .formContainer {
             max-width: 300px;
             margin: auto;
@@ -20,13 +23,26 @@
                     @include font-medium;
                     padding: 5px;
                     input {
+                        @include input-desktop;
                         font-size: inherit;
+                        border-radius: 5px;
+                    }
+                    #inputError {
+                        color: map-get($theme-colors , "warning" );
+                        font-size: 1rem;
                     }
                     #submitButton {
                         font-size: 1.2rem;
                         height: 40px;
                         width: 100px;
                         margin: auto;
+                        border-radius: 5px;
+                    }
+                    select {
+                        @include input-desktop;
+                        border-radius: 5px;
+                        background-color: white;
+                        margin: 5px 0px;
                     }
                 }
             }
