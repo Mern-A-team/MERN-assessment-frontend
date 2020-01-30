@@ -1,31 +1,46 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../styles/components/forms/loginForm.style.scss'
 import '../../styles/components/forms/categoryForm.style.scss'
 import '../../styles/components/forms/userForm.style.scss'
 
+import API from '../../axios.config'
+
 import SubmitButton from '../buttons/standard_button.component'
 
-export default class AddUserForm extends Component {
-  render() {
+export default function AddUserForm(props) {
+
+    const [errMessage, setErrMessage] = useState("")
+
+    const CreateUser = event => {
+        event.preventDefault()
+        API.post("/user/", {
+            username: event.target.username.value,
+            password: event.target.password.value,
+            role: event.target.role.value
+        })
+        .then(res => console.log(res))
+        .catch(err => setErrMessage(err.response.data.errorMessage))
+        
+    }
+
     return (
         <div id="addUserFormContainer" className="formContainer">
-            <form>
+            <form onSubmit={CreateUser} id="addUser"> 
             <h3 className="divHeading" data-cy="addUserDivHeading">Add User</h3>
                 <div className="fieldset">
                     <label>Username:</label>
-                    <input type="text" />
+                    <input type="text" name="username" />
                 </div>
                 <div className="fieldset">
                     <label>Password:</label>
-                    <input type="text" />
+                    <input type="text" name="password" />
                 </div>
                 <div className="fieldset">
                     <label>Role:</label>
-
-                    <select name="Role" form="addUser" defaultValue="Guest">
-                        <option value="Admin">Admin</option>
-                        <option value="Volunteer">Volunteer</option>
-                        <option value="Guest">Guest</option>
+                    <select name="role" form="addUser" defaultValue="Guest">
+                        <option value="admin">Admin</option>
+                        <option value="volunteer">Volunteer</option>
+                        <option value="guest">Guest</option>
                     </select>
 
                 </div>
@@ -40,5 +55,4 @@ export default class AddUserForm extends Component {
             </div>
         </div>
     )
-  }
 }

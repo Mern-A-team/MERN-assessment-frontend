@@ -33,5 +33,6 @@ API.handleTokenExpiry = function (removeToken) {
     })
 }
 
+if (sessionStorage.getItem('token')) API.setHeader(sessionStorage.getItem('token'))
 
 export default API

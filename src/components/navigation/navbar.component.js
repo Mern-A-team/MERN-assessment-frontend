@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../../styles/components/navigation/navbar.style.scss'
 
-export default class SideNav extends Component {
-  render() {
+export default function SideNav(props) {
 
    function toggleNav() {
       function openNav() {
@@ -25,7 +24,13 @@ export default class SideNav extends Component {
       if (checkbox.checked === true) {
          openNav()
       } else { closeNav() }
+   }
 
+   function clearToken() {
+      if (sessionStorage.getItem("token")) {
+      sessionStorage.removeItem("token")
+      window.location.reload()
+      }
    }
 
     return (
@@ -42,6 +47,7 @@ export default class SideNav extends Component {
                <i className="fas fa-arrow-right fa-lg" id="toggleArrow"></i>
             </div>
             <div className="sidenavContainer" id="sidenavBottom">
+               {sessionStorage.getItem("token") && <Link to="" onClick={clearToken}><i class="fas fa-sign-out-alt fa-lg"></i></Link>}
                <Link to="/users"><i class="fas fa-user-friends fa-lg"></i></Link>
                <Link to="/help"><i class="far fa-question-circle fa-lg"></i></Link>
             </div>
@@ -52,5 +58,4 @@ export default class SideNav extends Component {
          </nav>
       </>
     )
-  }
 }
