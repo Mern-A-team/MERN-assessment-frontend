@@ -15,17 +15,17 @@ $theme-colors: (
 
   "success": rgba(203, 255, 163, 0.75),
   "info": #17a2b8,
-  "warning": #ffc107,
+  "warning": #c94949,
 );
 
 $fonts: 'Open Sans', sans-serif;
 
 @mixin standard-padding {
-  padding: 20px;
+  padding: 10px;
 }
 
 @mixin input-desktop {
-  height: 50px;
+  height: 30px;
 }
 
 @mixin flex-r {
@@ -39,9 +39,10 @@ $fonts: 'Open Sans', sans-serif;
 }
 
 @mixin font-medium {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 body {
   background-color: map-get($theme-colors , "background" );
+  font-family: $fonts;
 }

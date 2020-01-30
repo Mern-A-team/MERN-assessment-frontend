@@ -1,0 +1,17 @@
+@import '../../main.scss';
+
+#root {
+   div {
+      #authPrompt {
+         background-color: #e94c4c;
+         border: 1px solid black;
+         padding: 10px;
+         border-radius: 5px;
+         box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.411);
+            p {
+               padding: 0px;
+               margin: 0px;
+            }
+      }
+   }
+}
