@@ -1,68 +1,52 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../styles/components/forms/loginForm.style.scss'
 import '../../styles/components/forms/categoryForm.style.scss'
 
 import SubmitButton from '../buttons/standard_button.component'
 
-export default class AddCategoryForm extends Component {
-  render() {
+import API from '../../axios.config'
 
-    let data = [
-        { parent: "All", name: "Landscapes" },
-        { parent: "All", name: "People"},
-        { parent: "People", name: "General MacArthur"},
-        { parent: "All", name: "Year" },
-        { parent: "Year", name: "40s" },
-        { parent: "40s", name: "1942" }
-    ]
+export default function AddCategoryForm(props) {
 
-    // Populates a string that is used for each option in the "Select Category" dropdown list.
-    // Passes data as an array of objects, sets the top level parent and the default level of indentation.
-    function populateList(data, parent="All", level=0) {
-        // assigns x as all items that have the parent parameter as their parent. 
-        const x = data.filter(item => item.parent === parent)
-        // if the parent is "All", push the element name to options and call the function again.
-        if (parent === "All") {
-            x.forEach((element, index) => {
-                options.push(`${element.name}`)
-                populateList(data, element.name)                
-            });
-        // This will run if the parent isn't "All"
-        } else {
-            // For each element that isn't top level, add a space by default and another for each level of indentation.
-            x.forEach((element, index) => {
-                let space = "\u00A0\u00A0"
-                for (let i=0; i < level; i++) {
-                    space += "\u00A0\u00A0"
-                }
-                // Push the element name with the appropriate indentation.
-                options.push(`${space}${element.name}`)
-                // Call the function again but pass in the element's name as the parent and add a level of indentation.
-                populateList(data, element.name, level+1)
-            })
-        }
+    const [options] = useState(props.selectoptions)
+    const [errMessage, setErrMessage] = useState("")
+
+
+    useEffect (() => {
+    }, [errMessage])
+
+    const CreateCategory = event => {
+        event.preventDefault()
+        API.post("/categories/", {
+            name: event.target.name.value,
+            parent: event.target.parent.value.trim()
+        })
+        .then(res => console.log(res))
+        .catch(err => setErrMessage(err.response.data.errorMessage))  
     }
 
-    // Sets the empty array for options to be mapped.
-    let options = []
-    // Calls the populateList function and passes in the data to be mapped.
-    populateList(data)
+    const LogReq = event => {
+        event.preventDefault()
+        let name = event.target.name.value
+        let parent = event.target.parent.value
+        let datavalue = [name, parent]
+        console.log(datavalue)
+    }
 
     return (
         <div id="addCategoryFormContainer" className="formContainer">
-            <h1 className="pageHeading" data-cy="addCategoryFormHeading">Add Category</h1>
-            <form>
-
+            <h1 className="pageHeading" data-cy="addCategoryFormHeading">Add Category</h1><button onClick={props.Close}>X</button>
+            <form id ="addCategory" onSubmit={CreateCategory}>
                 <div className="fieldset">
                     <label>Name:</label>
-                    <input type="text" />
+                    <input type="text" name="name" />
                 </div>
                 <div className="fieldset">
                     <label>Parent Category:</label>
 
-                    <select name="categoryList" form="addCategory" defaultValue="All">
+                    <select name="parent" form="addCategory" defaultValue="All">
                         <option className="option" value="All">No Parent Category</option>
-                        {options.map(opt => <option className="option">{opt}</option>)}
+                        {options.map(opt => <option className="option" value={opt} >{opt}</option>)}
                     </select>
 
                 </div>
@@ -74,4 +58,3 @@ export default class AddCategoryForm extends Component {
         </div>
     )
   }
-}

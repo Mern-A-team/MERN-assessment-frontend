@@ -67,7 +67,7 @@ export default function App() {
             <Route exact path="/users"
               render={ (props) => userRole==="admin" ? <UsersPage {...props} /> : <Redirect to="/dashboard" /> } />
             <Route exact path="/categories"
-              render={ (props) => token ? <CategoriesPage {...props} /> : <Redirect to="/login" /> } />
+              render={ (props) => token ? <CategoriesPage {...props} userRole={userRole} /> : <Redirect to="/login" /> } />
             <Route exact path="/search"
               render={ (props) => token ? <SearchPage {...props} /> : <Redirect to="/login" /> } />
             <Route exact path="/help"

@@ -1,76 +1,75 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../styles/components/forms/loginForm.style.scss'
 import '../../styles/components/forms/categoryForm.style.scss'
 
 import SubmitButton from '../buttons/standard_button.component'
 
-export default class EditCategoryForm extends Component {
-  render() {
+import API from '../../axios.config'
 
-    let data = [
-        { parent: "All", name: "Landscapes" },
-        { parent: "All", name: "People"},
-        { parent: "People", name: "General MacArthur"},
-        { parent: "All", name: "Year" },
-        { parent: "Year", name: "40s" },
-        { parent: "40s", name: "1942" }
-    ]
+export default function EditCategoryForm(props) {
+    const [options, setOptions] = useState()
+    const [data] = useState(props.data)
+    const [currentName, setCurrentName] = useState()
+    const [currentParent, setCurrentParent] = useState()
+    const [currentId, setCurrentId] = useState()
 
-    // Populates a string that is used for each option in the "Select Category" dropdown list.
-    // Passes data as an array of objects, sets the top level parent and the default level of indentation.
-    function populateList(data, parent="All", level=0) {
-        // assigns x as all items that have the parent parameter as their parent. 
-        const x = data.filter(item => item.parent === parent)
-        // if the parent is "All", push the element name to options and call the function again.
-        if (parent === "All") {
-            x.forEach((element, index) => {
-                options.push(`${element.name}`)
-                populateList(data, element.name)                
-            });
-        // This will run if the parent isn't "All"
-        } else {
-            // For each element that isn't top level, add a space by default and another for each level of indentation.
-            x.forEach((element, index) => {
-                let space = "\u00A0\u00A0"
-                for (let i=0; i < level; i++) {
-                    space += "\u00A0\u00A0"
-                }
-                // Push the element name with the appropriate indentation.
-                options.push(`${space}${element.name}`)
-                // Call the function again but pass in the element's name as the parent and add a level of indentation.
-                populateList(data, element.name, level+1)
-            })
-        }
+    useEffect (() => {
+        let editThis = data.find(obj => obj.name === props.current)
+        console.log(editThis)
+        setCurrentName(editThis.name)
+        setCurrentParent(editThis.parent)
+        setCurrentId(editThis._id)
+    }, [])
+
+    const CreateOptions = () => {
+        let newOptions = []
+        console.log(newOptions)
+        props.selectoptions.forEach(element => {
+            element.trim() === currentName ? console.log(`${element} matches ${currentName}`) : newOptions.push(element)
+            console.log(newOptions)
+        })
+        setOptions(newOptions)
     }
 
-    // Sets the empty array for options to be mapped.
-    let options = []
-    // Calls the populateList function and passes in the data to be mapped.
-    populateList(data)
+    useEffect (() => {
+        CreateOptions()
+    }, [currentName])
+
+    const UpdateCategory = event => {
+        // alert('foo')
+        props.Close()
+        event.preventDefault()
+        API.patch(`/categories/${currentId}`, {
+            name: event.target.name.value,
+            parent: event.target.parent.value.trim()
+        })
+        .then(res => {console.log(res); props.Close()})
+        .catch(err =>console.log(err.response.data.errorMessage))  
+    }
+
 
     return (
         <div id="editCategoryFormContainer" className="formContainer">
-            <h1 className="pageHeading" data-cy="editCategoryFormHeading">Edit Category</h1>
-            <form>
-
+            <h1 className="pageHeading" data-cy="editCategoryFormHeading">Edit Category</h1><button onClick={props.Close}>X</button>
+            <form id="editCategory" onSubmit={UpdateCategory}>
                 <div className="fieldset">
                     <label>Rename:</label>
-                    <input type="text" placeholder="Category Name" />
+                    <input type="text" name="name" />
                 </div>
                 <div className="fieldset">
                     <label>Parent Category:</label>
 
-                    <select name="categoryList" form="editCategory">
-                        {options.map(opt => <option>{opt}</option>)}
+                    {options &&
+                    <select name="parent" form="editCategory" defaultValue={currentParent}>
+                        <option className="option" value="All">No Parent Category</option>
+                        {options.map(opt => <option className="option" value={opt} >{opt}</option>)}
                     </select>
-
+                    }
                 </div>
                 <div className="fieldset">
                     <SubmitButton />
                 </div>
-
             </form>
         </div>
     )
   }
-}
