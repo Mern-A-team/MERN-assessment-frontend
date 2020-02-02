@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../styles/components/forms/loginForm.style.scss'
 import '../../styles/components/forms/categoryForm.style.scss'
 import '../../styles/components/forms/userForm.style.scss'
 
 import SubmitButton from '../buttons/standard_button.component'
 
-export default class EditUserForm extends Component {
-  render() {
+export default function EditUserForm(props) {
     return (
         <div id="editUserFormContainer" className="formContainer">
             <form>
@@ -36,5 +35,4 @@ export default class EditUserForm extends Component {
 
         </div>
     )
-  }
 }
