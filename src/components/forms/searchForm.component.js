@@ -1,13 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CategoryFilters from './categoryFilters.component'
 import '../../styles/components/forms/categoryFilters.style.scss'
 
+
+
 export default function SearchFilters() {
 
-    useEffect(() => {
+   
+   const [formcat, setformcat] = useState()
 
-    }, [])
 
+
+    const GetCategories = (array) => { 
+      setformcat(array)
+   }
 
     return (
         <>
@@ -16,7 +22,9 @@ export default function SearchFilters() {
                <button>Search</button>
             </div>
             <p id="filterTitle">Category Filters:</p>
-               <CategoryFilters />     
+               <CategoryFilters GetCategories={GetCategories} />  
+
+    
         </>
    )
 }

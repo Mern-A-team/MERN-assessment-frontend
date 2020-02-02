@@ -60,14 +60,14 @@ export default function App() {
               render={ (props) => token ? <DashboardPage {...props} userRole={userRole} /> : <Redirect to="/login" /> } />
             <Route exact path="/addphoto" 
               render={ (props) => userRole==="admin" || userRole==="volunteer" ? <AddPhotoPage {...props} /> : <Redirect to={{pathname: '/dashboard', state: { promptMessage: "You need to be logged in as Admin or Volunteer to do this." }}} /> } />
-            <Route exact path="/editphoto" 
+            <Route exact path="/photo/:id/edit" 
               render={ (props) => userRole==="admin" || userRole==="volunteer" ? <EditPhotoPage {...props} /> : <Redirect to={{pathname: '/dashboard', state: { promptMessage: "You need to be logged in as Admin or Volunteer to do this." }}} /> } />
-            <Route exact path="/showphoto" 
+            <Route exact path="/photo/:id" 
               render={ (props) => token ? <ShowPhotoPage {...props} /> : <Redirect to="/login" /> } />
             <Route exact path="/users"
               render={ (props) => userRole==="admin" ? <UsersPage {...props} /> : <Redirect to="/dashboard" /> } />
             <Route exact path="/categories"
-              render={ (props) => token ? <CategoriesPage {...props} /> : <Redirect to="/login" /> } />
+              render={ (props) => token ? <CategoriesPage {...props} userRole={userRole} /> : <Redirect to="/login" /> } />
             <Route exact path="/search"
               render={ (props) => token ? <SearchPage {...props} /> : <Redirect to="/login" /> } />
             <Route exact path="/help"

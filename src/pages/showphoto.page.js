@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import SideNav from '../components/navigation/navbar.component'
 import StaticNav from '../components/navigation/staticnav.component'
 import '../styles/pages/showphoto.page.scss'
 
-export default class ShowPhoto extends Component {
-  render() {
+export default function ShowPhoto(props) {
+
+
+
     return (
       <>
         <SideNav />
@@ -13,5 +15,4 @@ export default class ShowPhoto extends Component {
       </>
     )
   }
-}
 
