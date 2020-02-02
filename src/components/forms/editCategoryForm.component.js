@@ -36,7 +36,6 @@ export default function EditCategoryForm(props) {
     }, [currentName])
 
     const UpdateCategory = event => {
-        // alert('foo')
         props.Close()
         event.preventDefault()
         API.patch(`/categories/${currentId}`, {
