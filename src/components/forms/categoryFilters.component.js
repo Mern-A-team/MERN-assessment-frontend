@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import '../../styles/components/forms/categoryFilters.style.scss'
 
-export default function SearchFilters() {
+export default function SearchFilters(props) {
     const [data] = useState([
         { parent: "All", name: "Landscapes" },
         { parent: "All", name: "People"},
@@ -22,6 +22,7 @@ export default function SearchFilters() {
 
     useEffect(() => {
         populateTags(data)
+        props.GetCategories(formCategories)
     }, [formCategories])
 
     function findChildren(current, tag, data, formlist) {
@@ -156,7 +157,7 @@ export default function SearchFilters() {
             <div id="tagContainer">
                {tags.map((t,i) => <div id="tags">{t}<a href="#" onClick={() => removeTag(i)}><i class="fas fa-times"></i></a></div>)} 
             </div>
-            <select id="categorySelect" name="categoryList" form="addCategory" defaultValue="All" onChange={setFilters}>
+            <select id="categorySelect" name="category" form="add" defaultValue="All" onChange={setFilters}>
                 <option className="option" value="All">No Parent Category</option>
                 {options.map(opt => <option className="option">{opt}</option>)}
             </select>

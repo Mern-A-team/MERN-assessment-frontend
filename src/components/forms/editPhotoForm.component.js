@@ -12,7 +12,7 @@ export default function EditCategoryForm(props) {
 
     const AddPhoto = event => {
         event.preventDefault()
-        API.post(`/photos/addPhoto`, {
+        API.patch(`/photos/editPhoto`, {
             name: event.target.name.value,
             idNumber: event.target.idNumber.value,
             location: event.target.location.value,
