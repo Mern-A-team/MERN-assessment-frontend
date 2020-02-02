@@ -24,7 +24,7 @@ export default function EditCategoryForm(props) {
         .catch(err =>console.log(err.response.data.errorMessage))  
     }
 
-    const GetCategories = (array) => { 
+    const GetCategories = (array) => {
         setformcat(array)
     }
 
