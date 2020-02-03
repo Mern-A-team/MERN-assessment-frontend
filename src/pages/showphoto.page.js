@@ -12,6 +12,7 @@ export default function ShowPhoto(props) {
 
     useEffect(() => {
       GetPhoto()
+      // eslint-disable-next-line
     }, [])
 
     const GetPhoto = () => {

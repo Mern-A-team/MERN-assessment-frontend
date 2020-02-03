@@ -39,8 +39,7 @@ export default function App() {
       sessionStorage.clear()
       getToken(null)
     })
-
-  }, [])
+  }, [token])
 
   const onSuccess = token => {
     getToken(sessionStorage.setItem("token", token))

@@ -17,11 +17,13 @@ export default function SearchFilters(props) {
     useEffect(() => {
         let list = populateList(data)
         setOptions(list)
+        // eslint-disable-next-line
     }, [data])
 
     useEffect(() => {
         populateTags(data)
         props.GetCategories(formCategories)
+        // eslint-disable-next-line
     }, [formCategories])
 
     const GetData = () => {        
@@ -162,11 +164,11 @@ export default function SearchFilters(props) {
     return (
         <>
             <div id="tagContainer">
-               {tags.map((t,i) => <div id="tags">{t}<button onClick={() => removeTag(i)}><i class="fas fa-times"></i></button></div>)} 
+               {tags.map((t,i) => <div id="tags" key={t}>{t}<button key={i} onClick={() => removeTag(i)}><i  className="fas fa-times"></i></button></div>)} 
             </div>
             <select id="categorySelect" name="category" form="add" defaultValue="All" onChange={setFilters}>
                 <option className="option" value="All">No Parent Category</option>
-                {options.map(opt => <option className="option">{opt}</option>)}
+                {options.map(opt => <option key={opt} className="option">{opt}</option>)}
             </select>
             <div id="tagErrorDiv">
                 {tagError}
