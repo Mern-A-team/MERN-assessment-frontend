@@ -4,7 +4,7 @@ import JWT from "jsonwebtoken"
 //creating an axios instance and seeting a url so that we can make api calls 
 //in files that we require this in without writing the complete url evertime
 const API = axios.create({
-    baseURL: "http://localhost:3006"
+    baseURL: "https://archivise.herokuapp.com/"
 })
 
 //This function sets the header of the axios call with the token that we pass in
