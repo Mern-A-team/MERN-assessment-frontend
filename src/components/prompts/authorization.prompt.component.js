@@ -10,6 +10,7 @@ export default function AuthorizationPrompt(props) {
        setMessage(props.location.state.promptMessage)
        window.history.pushState(null, '')
      }
+     // eslint-disable-next-line
    }, [])
 
     return (

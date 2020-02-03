@@ -19,6 +19,7 @@ export default function EditCategoryForm(props) {
         setCurrentName(editThis.name)
         setCurrentParent(editThis.parent)
         setCurrentId(editThis._id)
+        // eslint-disable-next-line
     }, [])
 
     const CreateOptions = () => {
@@ -32,7 +33,9 @@ export default function EditCategoryForm(props) {
     }
 
     useEffect (() => {
+        // eslint-disable-next-line
         CreateOptions()
+        // eslint-disable-next-line
     }, [currentName])
 
     const UpdateCategory = event => {
@@ -68,7 +71,7 @@ export default function EditCategoryForm(props) {
                     {options &&
                     <select name="parent" form="editCategory" defaultValue={currentParent}>
                         <option className="option" value="All">No Parent Category</option>
-                        {options.map(opt => <option className="option" value={opt} >{opt}</option>)}
+                        {options.map(opt => <option key={opt} className="option" value={opt} >{opt}</option>)}
                     </select>
                     }
                 </div>
