@@ -8,10 +8,13 @@ import EditUserForm from '../components/forms/editUserForm.component'
 import '../styles/pages/users.page.scss'
 
 import API from '../axios.config'
+import { Link } from 'react-router-dom'
 
 export default function Users(props) {
 
   const [users, getUsers] = useState([])
+  const [popup, setPopup] = useState(null)
+  const [currentUser, setCurrentUser] = useState()
 
   useEffect(() => {
     CallUsers()
@@ -28,14 +31,45 @@ export default function Users(props) {
     .catch(err => console.log(err))
   }
 
+  const RenderAddUser = () => {
+    let form = "add"
+    setPopup(form)
+  }
+
+  const RenderEditUser = event => {
+    event.preventDefault()
+    let current = event.target.value
+    setCurrentUser(current)
+    let form = "edit"
+    setPopup(form)
+  }
+
+
+  const CloseAdd = () => {
+    let form = ""
+    setPopup(form)
+  }
+
+  const CloseEdit = () => {
+    let form = ""
+    setPopup(form)
+  }
+
     return (
       <>
         <SideNav />
         <StaticNav />
         <h1>This is the Users page.</h1>
-        {users && users.map((u) => <div id="user">{u.username}</div>)}
-        <AddUserForm /><br />
-        <EditUserForm />
+        <div id="buttonContainer">
+        <button onClick={RenderAddUser}>Add User</button>
+        </div>
+        {users && !popup && users.map(cat => <p>{cat.username}<button onClick={RenderEditUser} value={cat.id} >Edit</button></p>)}
+        { popup === "add" &&
+        <AddUserForm Close={CloseAdd}  />
+        }
+        { popup === "edit" &&
+        <EditUserForm Close={CloseEdit} currentUser={currentUser}  />
+        }
       </>
     )
 }

@@ -53,6 +53,7 @@ export default function AddUserForm(props) {
                 <h3 className="divHeading" data-cy="roleInfoDivHeading">Role Information</h3>
                 <p>This is role information.</p>
             </div>
+            <button onClick={props.Close}>X</button>
         </div>
     )
 }
