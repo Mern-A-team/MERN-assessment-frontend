@@ -10,7 +10,6 @@ export default class Login extends Component {
   render() {
     return (
       <>
-        <SideNav />
         <LoginForm onSuccess={this.props.onSuccess} />
       </>
     )

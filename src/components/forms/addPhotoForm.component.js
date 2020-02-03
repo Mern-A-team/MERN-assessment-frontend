@@ -55,7 +55,7 @@ export default function EditCategoryForm(props) {
 
                 <div className="fieldset">
                     <label>Categories:</label>
-                    <CategoryFilters GetCategories={GetCategories}/>
+                    <CategoryFilters GetCategories={GetCategories} formcat={formcat}/>
                 </div>
 
                 <div className="fieldset">

@@ -53,7 +53,7 @@ export default function App() {
         <BrowserRouter>
           <div>
             <Route exact path="/" 
-              render={ (props) => <LandingPage {...props}  /> } />
+              render={ (props) => token ? <Redirect to="/dashboard" /> : <LandingPage {...props}  /> } />
             <Route exact path="/login" 
               render={ (props) => token ? <Redirect to="/dashboard" /> : <LoginPage {...props} userRole={userRole} onSuccess={onSuccess} /> } />
             <Route exact path="/dashboard" 

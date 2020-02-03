@@ -6,16 +6,16 @@ import SubmitButton from '../buttons/standard_button.component'
 
 import API from '../../axios.config'
 
-export default function EditCategoryForm(props) {
+export default function EditPhotoForm(props) {
 
-    const [formcat, setformcat] = useState()
+    const [formcat, setFormcat] = useState()
     const [photoName, setPhotoName] = useState(props.location.state.data.name)
     const [photoID, setPhotoID] = useState(props.location.state.data.idNumber)
     const [photoLocation, setPhotoLocation] = useState(props.location.state.data.location)
     const [photoDescription, setPhotoDescription] = useState(props.location.state.data.description)
 
     const GetCategories = (array) => { 
-        setformcat(array)
+        setFormcat(array)
     }
 
     const EditPhoto = event => {
@@ -25,6 +25,7 @@ export default function EditCategoryForm(props) {
           idNumber: event.target.idNumber.value,
           location: event.target.location.value,
           description: event.target.description.value,
+          category: formcat,
           fileRef: "This is a fileRef."
       })
       .then(res => {console.log(res)})
@@ -42,6 +43,13 @@ export default function EditCategoryForm(props) {
    }
    const ChangeDescription = () => {
       setPhotoDescription(document.getElementById("changeDescription").value)
+   }
+
+   const DeletePhoto = event => {
+    event.preventDefault()
+    API.delete(`/photos/${props.location.state.data._id}`)
+    .then(res => {console.log(res)})
+    .catch(err =>console.log(err.response.data.errorMessage))   
    }
 
     return (
@@ -70,7 +78,12 @@ export default function EditCategoryForm(props) {
                 </div>
 
                 <div className="fieldset">
+                    <CategoryFilters GetCategories={GetCategories} formcat={formcat}/>
+                </div>
+
+                <div className="fieldset">
                     <SubmitButton />
+                    <button onClick={DeletePhoto}>Delete</button>
                 </div>
 
             </form>

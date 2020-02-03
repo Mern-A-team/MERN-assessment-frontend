@@ -46,6 +46,13 @@ export default function EditCategoryForm(props) {
         .catch(err =>console.log(err.response.data.errorMessage))  
     }
 
+    const DeleteCategory = () => {
+        props.Close()
+        API.delete(`/categories/${currentId}`)
+        .then(res => {console.log(res)})
+        .catch(err =>console.log(err.response.data.errorMessage))  
+    }
+
 
     return (
         <div id="editCategoryFormContainer" className="formContainer">
@@ -66,7 +73,7 @@ export default function EditCategoryForm(props) {
                     }
                 </div>
                 <div className="fieldset">
-                    <SubmitButton />
+                    <SubmitButton /><button type="button" onClick={DeleteCategory}>Delete</button>
                 </div>
             </form>
         </div>
