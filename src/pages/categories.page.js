@@ -98,7 +98,6 @@ export default function Categories(props) {
       { props.userRole && props.userRole === "admin" &&
       <div id="buttonContainer">
         <button onClick={RenderAddCategory}>Add Category</button>
-        <button onClick={RenderEditCategory}>Edit Category</button>
       </div> }
 
       { data && popup === "" && 

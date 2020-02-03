@@ -24,7 +24,6 @@ export default function SearchFilters() {
             <p id="filterTitle">Category Filters:</p>
                <CategoryFilters GetCategories={GetCategories} />  
 
-    
         </>
    )
 }

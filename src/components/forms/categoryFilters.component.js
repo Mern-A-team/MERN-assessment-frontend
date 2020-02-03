@@ -1,29 +1,36 @@
 import React, { useState, useEffect } from 'react'
 import '../../styles/components/forms/categoryFilters.style.scss'
 
+import API from '../../axios.config'
+
 export default function SearchFilters(props) {
-    const [data] = useState([
-        { parent: "All", name: "Landscapes" },
-        { parent: "All", name: "People"},
-        { parent: "People", name: "General MacArthur"},
-        { parent: "All", name: "Year" },
-        { parent: "Year", name: "40s" },
-        { parent: "40s", name: "1942" }
-    ])
+    const [data, setData] = useState([])
     const [tags, setTags] = useState([])
     const [options, setOptions] = useState([])
     const [formCategories, setFormCategories] = useState([])
     const [tagError, setTagError] = useState("")
 
     useEffect(() => {
+        GetData()
+    }, [])
+
+    useEffect(() => {
         let list = populateList(data)
         setOptions(list)
-    }, [])
+    }, [data])
 
     useEffect(() => {
         populateTags(data)
         props.GetCategories(formCategories)
     }, [formCategories])
+
+    const GetData = () => {        
+        API.get(`/categories/`, {
+            
+        })
+        .then(res => {setData(res.data.results)})
+        .catch(err =>console.log(err.response.data.errorMessage))  
+    }
 
     function findChildren(current, tag, data, formlist) {
             console.log(`this is the current category: ${current}`)
@@ -155,7 +162,7 @@ export default function SearchFilters(props) {
     return (
         <>
             <div id="tagContainer">
-               {tags.map((t,i) => <div id="tags">{t}<a href="#" onClick={() => removeTag(i)}><i class="fas fa-times"></i></a></div>)} 
+               {tags.map((t,i) => <div id="tags">{t}<button onClick={() => removeTag(i)}><i class="fas fa-times"></i></button></div>)} 
             </div>
             <select id="categorySelect" name="category" form="add" defaultValue="All" onChange={setFilters}>
                 <option className="option" value="All">No Parent Category</option>
