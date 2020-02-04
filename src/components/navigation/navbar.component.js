@@ -47,7 +47,10 @@ export default function SideNav(props) {
                <Link to="/search"><i className="fas fa-search fa-lg"></i></Link>
                <Link to="/categories"><i className="fas fa-book fa-lg"></i></Link>
                {/* eslint-disable-next-line */}
-               {token && userRole === "volunteer" || userRole === "admin" && <Link to="/addphoto"><i className="fas fa-plus fa-lg"></i></Link>}
+               {token && userRole === "volunteer" || userRole === "admin" ?
+                <Link to="/addphoto"><i className="fas fa-plus fa-lg"></i></Link>
+                :
+                 "" }
             </div>
             <div className="sidenavContainer" id="sidenavMiddle">
                <input type="checkbox" id="toggle" onClick={toggleNav} />

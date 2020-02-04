@@ -1,1 +1,14 @@
 @import '../main.scss';
+
+#root{
+    div{
+        #addPhotoFormContainer{
+            height: 95vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
