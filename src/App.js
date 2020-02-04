@@ -62,7 +62,7 @@ export default function App() {
             <Route exact path="/photo/:id/edit" 
               render={ (props) => userRole==="admin" || userRole==="volunteer" ? <EditPhotoPage {...props} /> : <Redirect to={{pathname: '/dashboard', state: { promptMessage: "You need to be logged in as Admin or Volunteer to do this." }}} /> } />
             <Route exact path="/photo/:id" 
-              render={ (props) => token ? <ShowPhotoPage {...props} /> : <Redirect to="/login" /> } />
+              render={ (props) => token ? <ShowPhotoPage {...props} userRole={userRole} /> : <Redirect to="/login" /> } />
             <Route exact path="/users"
               render={ (props) => userRole==="admin" ? <UsersPage {...props} /> : <Redirect to="/dashboard" /> } />
             <Route exact path="/categories"
