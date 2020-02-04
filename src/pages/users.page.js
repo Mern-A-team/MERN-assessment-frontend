@@ -44,11 +44,13 @@ export default function Users(props) {
   const CloseAdd = () => {
     let form = "";
     setPopup(form);
+    CallUsers()
   };
 
   const CloseEdit = () => {
     let form = "";
     setPopup(form);
+    CallUsers()
   };
 
   return (

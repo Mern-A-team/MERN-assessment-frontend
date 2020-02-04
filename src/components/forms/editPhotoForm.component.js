@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import CategoryFilters from './categoryFilters.component'
 import '../../styles/components/forms/loginForm.style.scss'
 
@@ -19,7 +20,6 @@ export default function EditPhotoForm(props) {
 	const [photoDescription, setPhotoDescription] = useState(
 		props.location.state.data.description
 	)
-	// const [fileName] = useState(props.location.state.data.fileName)
 
 	const GetCategories = array => {
 		setFormcat(array)
@@ -36,7 +36,7 @@ export default function EditPhotoForm(props) {
 			fileRef: props.location.state.data.fileRef
 		})
 			.then(res => {
-				console.log(res)
+				props.history.push("/search")
 			})
 			.catch(err => console.log(err.response.data.errorMessage))
 	}

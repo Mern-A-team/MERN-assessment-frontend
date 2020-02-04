@@ -31,7 +31,7 @@ export default function EditCategoryForm(props) {
 					fileName: data.key
 				})
 					.then(res => {
-						console.log(res.data.message)
+						props.history.push("/search")
 					})
 					.catch(err => console.log(err.message))
 			})

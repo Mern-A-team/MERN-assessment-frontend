@@ -22,8 +22,9 @@ import './styles/main.scss'
 export default function App() {
 
   const [token, getToken] = useState(sessionStorage.getItem("token"))
-  const [userRole] = useState(token ? decode(token).role : null)
+  const [userRole, setUserRole] = useState(token ? decode(token).role : null)
   const [promptMessage, setPromptMessage] = useState()
+  const [logoutMessage, setLogoutMessage] = useState()
 
 //Here when the component is initialized we check session storage for a token
   useEffect(() => {
@@ -45,6 +46,7 @@ export default function App() {
   const onSuccess = token => {
     getToken(sessionStorage.setItem("token", token))
     API.setHeader(token)
+    setUserRole(decode(token).role)
   };
 
     return (
@@ -56,7 +58,7 @@ export default function App() {
             <Route exact path="/login" 
               render={ (props) => token ? <Redirect to="/dashboard" /> : <LoginPage {...props} userRole={userRole} onSuccess={onSuccess} promptMessage={promptMessage} setPromptMessage={setPromptMessage} /> } />
             <Route exact path="/dashboard" 
-              render={ (props) => token ? <DashboardPage {...props} userRole={userRole} promptMessage={promptMessage} /> : <Redirect to="/login" /> } />
+              render={ (props) => token ? <DashboardPage {...props} userRole={userRole} promptMessage={promptMessage} setPromptMessage={setPromptMessage} /> : <Redirect to="/login" /> } />
             <Route exact path="/addphoto" 
               render={ (props) => userRole==="admin" || userRole==="volunteer" ? <AddPhotoPage {...props} /> : <Redirect to={{pathname: '/dashboard', state: { promptMessage: "You need to be logged in as Admin or Volunteer to do this." }}} /> } />
             <Route exact path="/photo/:id/edit" 
