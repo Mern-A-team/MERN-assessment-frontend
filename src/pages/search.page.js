@@ -28,8 +28,8 @@ export default function Search(props) {
         <div id="resultsContainer">
           {results &&
             results.map(photo => (
-              <div className="card">
-                <Link key={photo} to={{ pathname: `/photo/${photo._id}` }}>
+              <div key={photo.name} className="card">
+                <Link key={photo.id} to={{ pathname: `/photo/${photo._id}` }}>
                   {photo.name}
                 </Link>
                 <img src="" alt="" />

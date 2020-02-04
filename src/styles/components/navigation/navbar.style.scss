@@ -70,5 +70,16 @@
          background-color: grey;
          transition-duration: .5s;
       }
+      #helpnav {
+         position: fixed;
+         height: 100%;
+         width: 150px;
+         overflow-x: hidden;
+         z-index: 0;
+         top: 0px;
+         left: -100px;
+         background-color: grey;
+         transition-duration: .5s;
+      }
    }
 }

@@ -9,7 +9,6 @@ export default function EditPhoto(props) {
       <>
         <SideNav />
         <StaticNav />
-        <h1>This is the Edit Photo page.</h1>
         <EditPhotoForm {...props} />
       </>
     )
