@@ -13,7 +13,7 @@ export default function LoginForm(props) {
 
     const Login = event => {
         event.preventDefault()
-        API.post("user/authorise", {
+        API.post("/user/authorise", {
             username: event.target.username.value,
             password: event.target.password.value
         })
