@@ -76,12 +76,14 @@ export default function Categories(props) {
 
 	const CloseAdd = () => {
 		let form = ''
-		setPopup(form)
+    setPopup(form)
+    CallCategories()
 	}
 
 	const CloseEdit = () => {
 		let form = ''
-		setPopup(form)
+    setPopup(form)
+    CallCategories()
 	}
 
 	return (
