@@ -35,7 +35,7 @@ export default function ShowPhoto(props) {
       {data && (
         <div id="showContainer">
 
-          <img id="photo" src="{data.fieRef}"/>
+          <img id="photo" src={`${data.fileRef}`}/>
           <h2>{data.name}</h2>
           <p><span>ID Number:</span> {data.idNumber}</p>
           <p><span>Location:</span> {data.location}</p>
