@@ -1,15 +1,19 @@
-import React, {  } from 'react'
-import StaticNav from '../components/navigation/staticnav.component'
-import SideNav from '../components/navigation/navbar.component'
-import '../styles/pages/landing.page.scss'
+import React from "react";
+import { Link } from "react-router-dom";
+import "../styles/pages/landing.page.scss";
 
 export default function Landing(props) {
-    return (
-      <>
-        <StaticNav />
-        <h1>This is the Landing page.</h1>
-        
-        <SideNav />
-      </>
-    )
+  return (
+    <div id="landing">
+      <div id="landingGradient">
+        <h1>Welcome to Archivise</h1>
+        <h3>
+          A photo archiving application built for the MacArthur Museum Brisbane
+        </h3>
+        <Link id="loginButton" data-cy="loginButton" to="/login">
+          Log In
+        </Link>
+      </div>
+    </div>
+  );
 }

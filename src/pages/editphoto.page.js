@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import SideNav from '../components/navigation/navbar.component'
 import StaticNav from '../components/navigation/staticnav.component'
 import EditPhotoForm from '../components/forms/editPhotoForm.component'

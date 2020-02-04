@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import CategoryFilters from './categoryFilters.component'
 import '../../styles/components/forms/loginForm.style.scss'
 
@@ -67,10 +67,9 @@ export default function EditCategoryForm(props) {
 					<label>Description:</label>
 					<input type='text' name='description' />
 				</div>
-
 				<div className='fieldset'>
 					<label>Categories:</label>
-					<CategoryFilters GetCategories={GetCategories} />
+					<CategoryFilters GetCategories={GetCategories} formcat={formcat} />
 				</div>
 
 				<div className='fieldset'>
