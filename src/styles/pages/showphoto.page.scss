@@ -1,1 +1,22 @@
 @import '../main.scss';
+
+#root {
+   div {
+      #showContainer {
+         background-color: map-get($theme-colors , light-grey );
+         border-radius: 5px;
+         padding: 10px;
+         h2 {
+            margin: 10px;
+            text-align: center;
+         }
+         span {
+            font-weight: bold;
+         }
+         a {
+            font-weight: bold;
+            text-transform: uppercase;
+         }
+      }
+   }
+}

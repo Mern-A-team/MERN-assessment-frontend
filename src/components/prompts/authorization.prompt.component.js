@@ -3,21 +3,12 @@ import React, { useState, useEffect } from 'react'
 import '../../styles/components/prompts/authorization.prompt.style.scss'
 
 export default function AuthorizationPrompt(props) {
-   const [promptMessage, setMessage] = useState("")
-
-   useEffect(() => {
-     if (props.location.state) {
-       setMessage(props.location.state.promptMessage)
-       window.history.pushState(null, '')
-     }
-     // eslint-disable-next-line
-   }, [])
 
     return (
        <>
-         { promptMessage && 
+         { props.promptMessage && 
          <div id="authPrompt">
-            <p>{promptMessage}</p>
+            <p>{props.promptMessage}</p>
          </div>
          }
          

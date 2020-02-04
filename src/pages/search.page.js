@@ -9,6 +9,7 @@ import API from "../axios.config";
 
 export default function Search(props) {
   const [results, setResults] = useState();
+  const [allPhotos, setAllPhotos] = useState();
 
   useEffect(() => {
     PhotoIndex();
@@ -16,7 +17,7 @@ export default function Search(props) {
 
   const PhotoIndex = () => {
     API.get("/photos/", {})
-      .then(res => setResults(res.data))
+      .then(res => setAllPhotos(res.data))
       .catch(err => console.log(err));
   };
 
@@ -24,12 +25,28 @@ export default function Search(props) {
     <>
       <SideNav />
       <div id="main">
-        <SearchForm />
+        <SearchForm results={results} setResults={setResults} allPhotos={allPhotos}/>
         <div id="resultsContainer">
           {results &&
+            allPhotos &&
             results.map(photo => (
-              <div className="card">
-                <Link key={photo} to={{ pathname: `/photo/${photo._id}` }}>
+              <div key={photo.name} className="card">
+                <Link key={photo.id} to={{ pathname: `/photo/${photo._id}` }}>
+                  {photo.name}
+                </Link>
+                <img src="" alt="" />
+                <p id="categories">Categories: {photo.category.join(", ")}</p>
+                <p id="description">
+                  Description:{photo.description.substring(0, 25)}...
+                </p>
+              </div>
+            ))}
+
+          {!results &&
+            allPhotos &&
+            allPhotos.map(photo => (
+              <div key={photo.name} className="card">
+                <Link key={photo.id} to={{ pathname: `/photo/${photo._id}` }}>
                   {photo.name}
                 </Link>
                 <img src="" alt="" />
