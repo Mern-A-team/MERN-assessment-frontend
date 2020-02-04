@@ -14,7 +14,7 @@ export default function EditPhotoForm(props) {
     const [photoLocation, setPhotoLocation] = useState(props.location.state.data.location)
     const [photoDescription, setPhotoDescription] = useState(props.location.state.data.description)
 
-    const GetCategories = (array) => { 
+    const GetCategories = (array) => {
         setFormcat(array)
     }
 
@@ -83,7 +83,8 @@ export default function EditPhotoForm(props) {
 
                 <div className="fieldset">
                     <SubmitButton />
-                    <button onClick={DeletePhoto}>Delete</button>
+                    <br/>
+                    <button id="delete" onClick={DeletePhoto}>Delete</button>
                 </div>
 
             </form>

@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import SideNav from "../components/navigation/navbar.component";
 import StaticNav from "../components/navigation/staticnav.component";
 import "../styles/pages/showphoto.page.scss";
-import { getImage } from "../services/photoHelpers"
-
 
 import API from '../axios.config'
 import S3 from 'react-s3'
@@ -43,6 +41,7 @@ export default function ShowPhoto(props) {
           <p><span>Description:</span> {data.description}</p>
           {(props.userRole === "admin" || props.userRole === "volunteer") &&
               <Link
+                id="button"
                 to={{
                   pathname: `/photo/${props.match.params.id}/edit`,
                   state: {
@@ -53,6 +52,9 @@ export default function ShowPhoto(props) {
                 Edit
               </Link>
           }
+          <br/>
+          <br/>
+          <Link type="button" to={{pathname: `/search`}}>Back to photos</Link>
         </div>
       )}
     </>
