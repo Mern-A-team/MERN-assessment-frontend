@@ -4,12 +4,10 @@ import LoginForm from "../components/forms/loginForm.component";
 
 import "../styles/pages/login.page.scss";
 
-export default class Login extends Component {
-  render() {
+export default function Login(props) {
     return (
       <>
-        <LoginForm onSuccess={this.props.onSuccess} />
+        <LoginForm onSuccess={props.onSuccess} promptMessage={props.promptMessage} setPromptMessage={props.setPromptMessage}/>
       </>
     );
   }
-}

@@ -6,6 +6,7 @@ import API from '../../axios.config'
 export default function LoginForm(props) {
 
     const [errMessage, setErrMessage] = useState("")
+    const [tokenResponse, setTokenResponse] = useState()
 
     useEffect (() => {
     }, [errMessage])
@@ -16,11 +17,21 @@ export default function LoginForm(props) {
             username: event.target.username.value,
             password: event.target.password.value
         })
-        .then(res => props.onSuccess(res.data.token))
+        .then(res => {  LoggedIn(res) })
         .catch(err => setErrMessage(err.response.data.errorMessage))
         
     }
 
+    useEffect (() => {
+        if (tokenResponse) {
+        props.onSuccess(tokenResponse.data.token)
+        }
+    }, [tokenResponse])
+
+    const LoggedIn = (res) => {
+        props.setPromptMessage("You have been Logged In successfully.")
+        setTokenResponse(res)
+    }
 
     
     return (
