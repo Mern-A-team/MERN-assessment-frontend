@@ -69,6 +69,12 @@
          left: -100px;
          background-color: grey;
          transition-duration: .5s;
+         a {
+            color: white;
+            display: flex;
+            padding: 20px;
+            text-decoration: none;
+         }
       }
       #helpnav {
          position: fixed;

@@ -89,7 +89,8 @@ export default function Categories(props) {
 	return (
 		<>
 			<SideNav />
-			<h1>This is the Categories page.</h1>
+			<div id="container">
+			<h1>List of Categories</h1>
 			{props.userRole && props.userRole === 'admin' && (
 				<div id='buttonContainer'>
 					<button onClick={RenderAddCategory}>Add Category</button>
@@ -126,6 +127,7 @@ export default function Categories(props) {
 					current={current}
 				/>
 			)}
+			</div>
 		</>
 	)
 }

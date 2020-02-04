@@ -1,1 +1,28 @@
 @import '../main.scss';
+
+#bkground {
+    background-color: rgba(237, 237, 237, 0.557);
+    width: 80%;
+    border-radius: 5px;
+    margin: auto;
+    h1 {
+        width: 80%;
+        text-align: center;
+        margin: auto;
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
+    p {
+        width: 80%;
+        margin: auto;
+        padding-bottom: 20px;
+
+    }
+    h3 {
+        width: 80%;
+        margin: auto;
+        padding-bottom: 10px;
+
+    }
+    
+}
