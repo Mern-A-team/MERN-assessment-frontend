@@ -14,6 +14,7 @@ export default function Categories(props) {
   const [options, setOptions] = useState([]);
   const [current, setCurrent] = useState();
 
+
   useEffect(() => {
     CallCategories();
   }, []);
@@ -77,11 +78,13 @@ export default function Categories(props) {
   const CloseAdd = () => {
     let form = "";
     setPopup(form);
+    CallCategories()
   };
 
   const CloseEdit = () => {
     let form = "";
     setPopup(form);
+    CallCategories()
   };
 
   return (

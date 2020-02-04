@@ -52,7 +52,7 @@ export default function EditCategoryForm(props) {
     const DeleteCategory = () => {
         props.Close()
         API.delete(`/categories/${currentId}`)
-        .then(res => {console.log(res)})
+        .then(res => {props.Close()})
         .catch(err =>console.log(err.response.data.errorMessage))  
     }
 

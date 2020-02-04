@@ -26,10 +26,11 @@ export default function LoginForm(props) {
         if (tokenResponse) {
         props.onSuccess(tokenResponse.data.token)
         }
+        // eslint-disable-next-line
     }, [tokenResponse])
 
     const LoggedIn = (res) => {
-        props.setPromptMessage("You have been Logged In successfully.")
+        props.setPromptMessage("You have been logged in successfully.")
         setTokenResponse(res)
     }
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import CategoryFilters from './categoryFilters.component'
 import '../../styles/components/forms/loginForm.style.scss'
 
@@ -28,7 +29,7 @@ export default function EditPhotoForm(props) {
           category: formcat,
           fileRef: "This is a fileRef."
       })
-      .then(res => {console.log(res)})
+      .then(res => props.history.push("/search"))
       .catch(err =>console.log(err.response.data.errorMessage))  
   }
 

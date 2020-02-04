@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../styles/components/forms/loginForm.style.scss";
 import "../../styles/components/forms/categoryForm.style.scss";
 
@@ -10,16 +10,14 @@ export default function AddCategoryForm(props) {
   const [options] = useState(props.selectoptions);
   const [errMessage, setErrMessage] = useState("");
 
-  useEffect(() => {}, [errMessage]);
-
   const CreateCategory = event => {
     event.preventDefault();
     API.post("/categories/", {
       name: event.target.name.value,
       parent: event.target.parent.value.trim()
     })
-      .then(res => console.log(res))
-      .catch(err => setErrMessage(err.response.data.errorMessage));
+      .then(res => {props.Close()})
+      .catch(err => setErrMessage(err.response.data));
   };
 
   return (
@@ -29,6 +27,7 @@ export default function AddCategoryForm(props) {
       </h1>
       <button onClick={props.Close}>X</button>
       <form id="addCategory" onSubmit={CreateCategory}>
+        {errMessage && <span>{errMessage}</span>}
         <div className="fieldset">
           <label>Name:</label>
           <input type="text" name="name" />
