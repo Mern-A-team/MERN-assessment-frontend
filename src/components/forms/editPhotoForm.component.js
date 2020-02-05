@@ -36,7 +36,7 @@ export default function EditPhotoForm(props) {
 			fileRef: props.location.state.data.fileRef
 		})
 			.then(res => {
-				props.history.push("/search")
+				props.history.push(`/photos/${props.match.params.id}/edit`)
 			})
 			.catch(err => console.log(err.response.data.errorMessage))
 	}

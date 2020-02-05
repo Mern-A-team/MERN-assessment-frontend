@@ -13,6 +13,7 @@ export default function Users(props) {
   const [users, getUsers] = useState([]);
   const [popup, setPopup] = useState(null);
   const [currentUser, setCurrentUser] = useState();
+  const [confirmPrompt, setConfirmPrompt] = useState()
 
   useEffect(() => {
     CallUsers();
@@ -30,6 +31,7 @@ export default function Users(props) {
 
   const RenderAddUser = () => {
     let form = "add";
+    setConfirmPrompt(null)
     setPopup(form);
   };
 
@@ -38,6 +40,7 @@ export default function Users(props) {
     let current = event.target.value;
     setCurrentUser(current);
     let form = "edit";
+    setConfirmPrompt(null)
     setPopup(form);
   };
 
@@ -56,7 +59,11 @@ export default function Users(props) {
   return (
     <>
       <SideNav />
-      <StaticNav />
+
+    { confirmPrompt &&
+      <p>{confirmPrompt}</p>
+    }
+
       <h1>This is the Users page.</h1>
       <div id="buttonContainer">
         <button onClick={RenderAddUser}>Add User</button>
@@ -71,9 +78,9 @@ export default function Users(props) {
             </button>
           </p>
         ))}
-      {popup === "add" && <AddUserForm Close={CloseAdd} />}
+      {popup === "add" && <AddUserForm Close={CloseAdd} setConfirmPrompt={setConfirmPrompt} />}
       {popup === "edit" && (
-        <EditUserForm Close={CloseEdit} currentUser={currentUser} />
+        <EditUserForm Close={CloseEdit} currentUser={currentUser} setConfirmPrompt={setConfirmPrompt} />
       )}
     </>
   );

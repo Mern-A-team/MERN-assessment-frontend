@@ -12,7 +12,8 @@ export default function Categories(props) {
 	const [data, getData] = useState([])
 	const [popup, setPopup] = useState('')
 	const [options, setOptions] = useState([])
-	const [current, setCurrent] = useState()
+  const [current, setCurrent] = useState()
+  const [confirmPrompt, setConfirmPrompt] = useState()
 
 	useEffect(() => {
 		CallCategories()
@@ -62,7 +63,8 @@ export default function Categories(props) {
 	}
 
 	const RenderAddCategory = () => {
-		let form = 'add'
+    let form = 'add'
+    setConfirmPrompt(null)
 		setPopup(form)
 	}
 
@@ -70,7 +72,8 @@ export default function Categories(props) {
 		event.preventDefault()
 		let category = event.target.value
 		setCurrent(category.trim())
-		let form = 'edit'
+    let form = 'edit'
+    setConfirmPrompt(null)
 		setPopup(form)
 	}
 
@@ -89,6 +92,10 @@ export default function Categories(props) {
 	return (
 		<>
 			<SideNav />
+      { confirmPrompt &&
+      <p>{confirmPrompt}</p>
+    }
+
 			<div id="container">
 			<h1>List of Categories</h1>
 			{props.userRole && props.userRole === 'admin' && (
@@ -117,14 +124,15 @@ export default function Categories(props) {
 				))}
 
 			{popup === 'add' && (
-				<AddCategoryForm Close={CloseAdd} selectoptions={options} />
+				<AddCategoryForm Close={CloseAdd} selectoptions={options} setConfirmPrompt={setConfirmPrompt} />
 			)}
 			{popup === 'edit' && (
 				<EditCategoryForm
 					Close={CloseEdit}
 					selectoptions={options}
 					data={data}
-					current={current}
+          current={current}
+          setConfirmPrompt={setConfirmPrompt}
 				/>
 			)}
 			</div>

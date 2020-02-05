@@ -12,6 +12,7 @@ export default function EditCategoryForm(props) {
     const [currentName, setCurrentName] = useState()
     const [currentParent, setCurrentParent] = useState()
     const [currentId, setCurrentId] = useState()
+    const [errMessage, setErrMessage] = useState("");
 
     useEffect (() => {
         let editThis = data.find(obj => obj.name === props.current)
@@ -45,16 +46,21 @@ export default function EditCategoryForm(props) {
             name: event.target.name.value,
             parent: event.target.parent.value.trim()
         })
-        .then(res => {console.log(res); props.Close()})
-        .catch(err =>console.log(err.response.data.errorMessage))  
+        .then(res => CloseAndPrompt(res) )
+        .catch(err => setErrMessage(err.response.data.errorMessage))  
     }
 
     const DeleteCategory = () => {
         props.Close()
         API.delete(`/categories/${currentId}`)
-        .then(res => {props.Close()})
-        .catch(err =>console.log(err.response.data.errorMessage))  
+        .then(res => CloseAndPrompt(res))
+        .catch(err => setErrMessage(err.response.data.errorMessage))  
     }
+
+    const CloseAndPrompt = (res) => {
+        props.setConfirmPrompt(res.data.message)
+        props.Close()
+      }
 
 
     return (
