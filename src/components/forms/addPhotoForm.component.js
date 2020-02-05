@@ -14,6 +14,7 @@ export default function EditCategoryForm(props) {
 	const [errMessage, setErrMessage] = useState()
 	const [savePrompt, setSavePrompt] = useState()
 
+	// File selection functionality called when a file for upload is selected.
 	const onChangeFile = event => {
 		setFile(event.target.files[0])
 	}
@@ -35,12 +36,13 @@ export default function EditCategoryForm(props) {
 					fileName: data.key
 				})
 					.then(res => {
+						// Sets the success prompt as the response message.
 						setSavePrompt(res.data.message)
-						// (`${res.config.data.name} has been saved!`)
 					})
-					// On error, console log the message.
+					// On error, set the error message.
 					.catch(err => setErrMessage("Something went wrong."))
 			})
+			// if the photo doesn't upload, set the error message.
 			.catch(err => setErrMessage(err.message))
 	}
 
@@ -96,6 +98,7 @@ export default function EditCategoryForm(props) {
 					<SubmitButton />
 				</div>
 
+				{/* This is where a simple save success prompt will be rendered if the variable is truthy. */}
 				{savePrompt && 
 					<p>{savePrompt}</p>
 				}

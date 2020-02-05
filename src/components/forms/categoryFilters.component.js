@@ -4,10 +4,15 @@ import '../../styles/components/forms/categoryFilters.style.scss'
 import API from '../../axios.config'
 
 export default function SearchFilters(props) {
+    // The live data from the API request.
     const [data, setData] = useState([])
+    // Tags to be physically rendered in the view.
     const [tags, setTags] = useState([])
+    // Options for the drop down select.
     const [options, setOptions] = useState([])
+    // Form Categories that are actually passed into the form as an array.
     const [formCategories, setFormCategories] = useState([])
+    // Error variable for messages.
     const [tagError, setTagError] = useState("")
 
     // On mount of Category Filters component, run getData().
@@ -39,24 +44,30 @@ export default function SearchFilters(props) {
         .catch(err =>console.log(err.response.data.errorMessage))  
     }
 
+    // Find the children categories of a category, if there are any, and remove them from formlist.
     function findChildren(current, tag, data, formlist) {
-            console.log(`this is the current category: ${current}`)
+            // Add the current category to the tag.
             tag.push(current)
+
+            // if there is a category where the parent is the current category, set it as the newCategory.
             if (data.find(element => element.parent === current)) {
                 let newCategory = data.find(element => element.parent === current)
-                console.log(`this is the newCategory: ${newCategory}`)
+                 // if the newCategory is in the formlist also, run the function on the name of newCategory to find it's children.
                 if (formlist.includes(newCategory.name)) {
                 findChildren(newCategory.name, tag, data, formlist)
                 }
             }
-                console.log(`this is the tag before join: ${tag}`)
+            // sets stringtag as a joined string of all the elements in the tag variable.
                 let stringtag = tag.join(" > ")
-                console.log(`this is the stringtag: ${stringtag}`)
+
+            // sets stringtaglist as the array of already present tags.
                 let stringtaglist = [...tags]
-                console.log(`This should be existing tags: ${stringtaglist}`)
+
+            // for each tag...
                 tag.forEach(element => {
+                    // if a tag in stringtaglist includes the element, set it to the matches variable.
                     let matches = stringtaglist.filter(x => x.includes(element))
-                    console.log(`This matches the string: ${matches}`)
+
                     let index = stringtaglist.indexOf(matches[0])
                     console.log(`stringtaglist: ${stringtaglist}`)
                     console.log(`index: ${index}`)
@@ -67,12 +78,13 @@ export default function SearchFilters(props) {
                 setTags(stringtaglist.filter(e => e))
     }
 
+    // using the formlist and data, set the tags to be rendered.
     function setTag(formlist, data) {
-        // for each element in formlist
+            // a new tag.
             let tag = []
             let element = formlist[0]
+            // Find the children categories of the first element in formlist.
             findChildren(element, tag, data, formlist)
-            console.log(`this is the new formlist: ${formlist}`)
     }
 
     function populateTags(data) {
