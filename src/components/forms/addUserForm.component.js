@@ -19,10 +19,12 @@ export default function AddUserForm(props) {
       password: event.target.password.value,
       role: event.target.role.value
     })
+    // on resolution, run the CloseAndPrompt function with the response message.
       .then(res => CloseAndPrompt(res) )
       .catch(err => setErrMessage(err.response.data));
   };
 
+  // sets the confirmation prompt via a function passed into props from the parent component, then unmounts the current component.
   const CloseAndPrompt = (res) => {
     props.setConfirmPrompt(res.data)
     props.Close()
@@ -36,6 +38,7 @@ export default function AddUserForm(props) {
           Add User
         </h3>
 
+        {/* This is where the error message will be displayed if there is one. */}
         { errMessage &&
 					<p style={{color: "darkred"}}>{errMessage}</p>
 				}
