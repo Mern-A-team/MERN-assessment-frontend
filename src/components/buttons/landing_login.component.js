@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+// Seperately styled login button for landing.
 export default class LoginButton extends Component {
   render() {
     return (

@@ -56,6 +56,8 @@ export default function EditCategoryForm(props) {
         .catch(err =>console.log(err.response.data.errorMessage))  
     }
 
+    
+
 
     return (
         <div id="editCategoryFormContainer" className="formContainer">

@@ -10,26 +10,31 @@ export default function SearchFilters(props) {
     const [formCategories, setFormCategories] = useState([])
     const [tagError, setTagError] = useState("")
 
+    // On mount of Category Filters component, run getData().
     useEffect(() => {
         GetData()
     }, [])
 
+    // When the data variable changes, populateList with the new data and setOptions with that resulting list.
     useEffect(() => {
         let list = populateList(data)
         setOptions(list)
         // eslint-disable-next-line
     }, [data])
 
+    // When the formCategories variable changes, populateTags with data. Pass the formCategories up to the parent component using GetCategory function.
     useEffect(() => {
         populateTags(data)
         props.GetCategories(formCategories)
         // eslint-disable-next-line
     }, [formCategories])
 
+    // API call to get an array of all photos in the database.
     const GetData = () => {        
         API.get(`/categories/`, {
             
         })
+        // On resolution, set the data variable to the array of 
         .then(res => {setData(res.data.results)})
         .catch(err =>console.log(err.response.data.errorMessage))  
     }

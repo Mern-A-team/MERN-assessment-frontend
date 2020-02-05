@@ -11,6 +11,7 @@ export default function AddUserForm(props) {
     // eslint-disable-next-line
   const [errMessage, setErrMessage] = useState("");
 
+  // API call to create the user.
   const CreateUser = event => {
     event.preventDefault();
     API.post("/user/", {
@@ -18,24 +19,37 @@ export default function AddUserForm(props) {
       password: event.target.password.value,
       role: event.target.role.value
     })
-      .then(res => console.log(res))
-      .catch(err => setErrMessage(err.response.data.errorMessage));
+      .then(res => CloseAndPrompt(res) )
+      .catch(err => setErrMessage(err.response.data));
   };
 
+  const CloseAndPrompt = (res) => {
+    props.setConfirmPrompt(res.data)
+    props.Close()
+  }
+
   return (
+    // Render for the Add User Form.
     <div id="addUserFormContainer" className="formContainer">
       <form onSubmit={CreateUser} id="addUser">
         <h3 className="divHeading" data-cy="addUserDivHeading">
           Add User
         </h3>
+
+        { errMessage &&
+					<p style={{color: "darkred"}}>{errMessage}</p>
+				}
+
         <div className="fieldset">
           <label>Username:</label>
           <input type="text" name="username" />
         </div>
+
         <div className="fieldset">
           <label>Password:</label>
           <input type="text" name="password" />
         </div>
+
         <div className="fieldset">
           <label>Role:</label>
           <select name="role" form="addUser" defaultValue="Guest">
@@ -44,6 +58,7 @@ export default function AddUserForm(props) {
             <option value="guest">Guest</option>
           </select>
         </div>
+
         <div className="fieldset">
           <SubmitButton />
         </div>
@@ -55,6 +70,8 @@ export default function AddUserForm(props) {
         </h3>
         <p>This is role information.</p>
       </div>
+
+      {/* This is the button that closes the Add User Form Prompt. */}
       <button onClick={props.Close}>X</button>
     </div>
   );
