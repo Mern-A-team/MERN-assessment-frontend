@@ -128,7 +128,7 @@ export default function SearchFilters(props) {
         if (parent === "All") {
             x.forEach(element => {
               list.push(element.name)
-              list = populateList(data, list, element.name)                
+              list = populateList(data, list, element.name)
             });
         // This will run if the parent isn't "All"
         } else {

@@ -97,7 +97,7 @@ export default function Categories(props) {
     }
 
 			<div id="container">
-			<h1>List of Categories</h1>
+			<h1 id="catTitle">List of Categories</h1>
 			{props.userRole && props.userRole === 'admin' && (
 				<div id='buttonContainer'>
 					<button id="addButt" onClick={RenderAddCategory}>Add Category</button>
