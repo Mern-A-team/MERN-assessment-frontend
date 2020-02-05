@@ -18,10 +18,15 @@ export default function AddCategoryForm(props) {
       parent: event.target.parent.value.trim()
     })
     // on resolution, close the Add Category prompt, which also re-renders the data.
-      .then(res => {props.Close()})
+      .then(res => CloseAndPrompt(res.data.message))
     // on failure, set the errMessage variable.
       .catch(err => setErrMessage(err.response.data));
   };
+
+  const CloseAndPrompt = (res) => {
+    props.setConfirmPrompt(res)
+    props.Close()
+  }
 
   return (
     // Add Category Prompt render.
@@ -32,6 +37,7 @@ export default function AddCategoryForm(props) {
       {/* Close prompt button. */}
       <button onClick={props.Close}>X</button>
       <form id="addCategory" onSubmit={CreateCategory}>
+
         {/* Error Message displayed here, if there is one. */}
         {errMessage && <span>{errMessage}</span>}
 

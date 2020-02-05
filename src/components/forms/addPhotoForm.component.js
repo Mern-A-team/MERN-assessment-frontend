@@ -35,10 +35,11 @@ export default function EditCategoryForm(props) {
 					fileName: data.key
 				})
 					.then(res => {
-						setSavePrompt(res.data.BaseResponse)
+						setSavePrompt(res.data.message)
+						// (`${res.config.data.name} has been saved!`)
 					})
 					// On error, console log the message.
-					.catch(err => console.log(err.message))
+					.catch(err => setErrMessage("Something went wrong."))
 			})
 			.catch(err => setErrMessage(err.message))
 	}
@@ -51,6 +52,7 @@ export default function EditCategoryForm(props) {
 	return (
 		// Add Photo form render.
 		<div id='addPhotoFormContainer' className='formContainer'>
+
 			<h1 className='pageHeading' data-cy='addPhotoFormHeading'>
 				Add Photo
 			</h1>

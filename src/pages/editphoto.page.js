@@ -9,7 +9,7 @@ export default function EditPhoto(props) {
       <>
         <SideNav />
         <StaticNav />
-        <EditPhotoForm {...props} />
+        <EditPhotoForm {...props} setPromptMessage={props.setPromptMessage} />
       </>
     )
   }
