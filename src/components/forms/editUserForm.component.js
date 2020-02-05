@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/components/forms/loginForm.style.scss";
 import "../../styles/components/forms/categoryForm.style.scss";
 import "../../styles/components/forms/userForm.style.scss";
@@ -7,6 +7,7 @@ import SubmitButton from "../buttons/standard_button.component";
 import API from "../../axios.config";
 
 export default function EditUserForm(props) {
+  const [errMessage, setErrMessage] = useState("");
   useEffect(() => {});
 
   const UpdateUser = event => {
@@ -16,16 +17,21 @@ export default function EditUserForm(props) {
       password: event.target.password.value,
       role: event.target.role.value
     })
-      .then(res => console.log(res))
-      .catch(err => console.log(err.response.data.errorMessage));
+      .then(res => CloseAndPrompt(res))
+      .catch(err => setErrMessage(err.response.data));
   };
 
   const DeleteUser = event => {
     event.preventDefault();
     API.delete(`/user/${props.currentUser}`)
-      .then(res => console.log(res))
+      .then(res => CloseAndPrompt(res))
       .catch(err => console.log(err.response.data.errorMessage));
   };
+
+  const CloseAndPrompt = (res) => {
+    props.setConfirmPrompt(res.data.message)
+    props.Close()
+  }
 
   return (
     <div id="editUserFormContainer" className="formContainer">
@@ -34,6 +40,11 @@ export default function EditUserForm(props) {
         <h3 className="divHeading" data-cy="editUserDivHeading">
           Edit User
         </h3>
+
+        { errMessage &&
+					<p style={{color: "darkred"}}>{errMessage}</p>
+				}
+
         <div className="fieldset">
           <label>Username:</label>
           <input type="text" name="username" />

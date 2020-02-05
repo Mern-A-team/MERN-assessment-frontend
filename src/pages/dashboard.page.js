@@ -25,9 +25,11 @@ export default function Dashboard(props) {
 				<h1>Welcome {props.userRole}</h1>
 				<div id='dashboard-links'>
 					<h2>Quick Actions</h2>
+					{ !props.userRole === "guest" && 
 					<a href='/addphoto'>Upload a photo</a>
+					}
 					<a href='/categories'>Categories</a>
-					<a href='/search'>Browse images</a>
+					<a href='/search'>Search images</a>
 					<a href='/help'>Help Page</a>
 				</div>
 				<h2 id='dashboard-count'>You have {imageCount} Images</h2>

@@ -9,6 +9,7 @@ export default function Users(props) {
 	const [users, getUsers] = useState([])
 	const [popup, setPopup] = useState(null)
 	const [currentUser, setCurrentUser] = useState()
+	const [confirmPrompt, setConfirmPrompt] = useState()
 
 	useEffect(() => {
 		CallUsers()
@@ -26,6 +27,7 @@ export default function Users(props) {
 
 	const RenderAddUser = () => {
 		let form = 'add'
+		setConfirmPrompt(null)
 		setPopup(form)
 	}
 
@@ -34,6 +36,7 @@ export default function Users(props) {
 		let current = event.target.value
 		setCurrentUser(current)
 		let form = 'edit'
+		setConfirmPrompt(null)
 		setPopup(form)
 	}
 
@@ -52,6 +55,7 @@ export default function Users(props) {
 	return (
 		<>
 			<SideNav />
+			{confirmPrompt && <p>{confirmPrompt}</p>}
 			<h1>Admin User Management</h1>
 			<div id='buttonContainer'>
 				{popup != 'add' && popup != 'edit' ? (
