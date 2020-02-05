@@ -20,6 +20,7 @@ export default function EditPhotoForm(props) {
 	const [photoDescription, setPhotoDescription] = useState(
 		props.location.state.data.description
 	)
+	const [errMessage, setErrMessage] = useState("");
 
 	const GetCategories = array => {
 		setFormcat(array)
@@ -36,9 +37,9 @@ export default function EditPhotoForm(props) {
 			fileRef: props.location.state.data.fileRef
 		})
 			.then(res => {
-				props.history.push(`/photos/${props.match.params.id}/edit`)
+				props.history.push(`/photo/${props.match.params.id}`)
 			})
-			.catch(err => console.log(err.response.data.errorMessage))
+			.catch(err => setErrMessage(err.response.data.message))
 	}
 
 	const ChangeName = () => {
@@ -61,11 +62,16 @@ export default function EditPhotoForm(props) {
 			.then(res => {
 				API.delete(`/photos/${props.location.state.data._id}`)
 					.then(res => {
-						console.log(res)
+						RedirectDelete()
 					})
 					.catch(err => console.error(err.response.data.errorMessage))
 			})
 			.catch(err => console.error(err))
+	}
+
+	const RedirectDelete = () => {
+		props.setPromptMessage("Photo has been deleted.")
+		props.history.push(`/search`)
 	}
 
 	return (
@@ -74,8 +80,11 @@ export default function EditPhotoForm(props) {
 				Edit Photo
 			</h1>
 			<form id='add' onSubmit={EditPhoto}>
+			{ errMessage &&
+					<p style={{color: "darkred"}}>{errMessage}</p>
+				}
 				<div className='fieldset'>
-					<label>Photo Name:</label>
+					<label>Photo Title:</label>
 					<input
 						type='text'
 						name='name'
@@ -124,7 +133,9 @@ export default function EditPhotoForm(props) {
 
 				<div className='fieldset'>
 					<SubmitButton />
-					<button onClick={DeletePhoto}>Delete</button>
+					{ props.userRole === "admin" &&
+						<button onClick={DeletePhoto}>Delete</button>
+					}
 				</div>
 			</form>
 		</div>
