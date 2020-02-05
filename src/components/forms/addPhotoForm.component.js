@@ -61,7 +61,7 @@ export default function EditCategoryForm(props) {
 					<p style={{color: "darkred"}}>{errMessage}</p>
 				}
 				<div className='fieldset'>
-					<label>Photo Name:</label>
+					<label>Photo Title:</label>
 					<input type='text' name='name' />
 				</div>
 
