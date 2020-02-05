@@ -7,7 +7,7 @@ import decode from 'jwt-decode'
 export default function SideNav(props) {
 
    // eslint-disable-next-line
-   const [token, getToken] = useState(sessionStorage.getItem("token"))
+   const [token] = useState(sessionStorage.getItem("token"))
    const [userRole] = useState(token ? decode(token).role : null)
 
    function toggleNav() {
