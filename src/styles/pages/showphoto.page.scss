@@ -6,6 +6,9 @@
          background-color: map-get($theme-colors , light-grey );
          border-radius: 5px;
          padding: 10px;
+         margin: auto;
+         width: 50%;
+         
          h2 {
             margin: 10px;
             text-align: center;
@@ -16,6 +19,22 @@
          a {
             font-weight: bold;
             text-transform: uppercase;
+         }
+         #photo {
+            display: block;
+            margin: 20px auto auto auto;
+            width: 95%;
+         }
+         a {
+            text-decoration: none;
+            padding: 5px;
+            color: black;
+            font-size: 1.1rem;
+            height: 40px;
+            width: 100px;
+            background-color: darkgrey;
+            margin: auto;
+            border-radius: 5px;
          }
       }
    }

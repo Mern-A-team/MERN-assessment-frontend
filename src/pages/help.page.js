@@ -9,6 +9,7 @@ export default class Help extends Component {
       <>
         <SideNav />
         <StaticNav />
+        <div id="bkground">
         <h1>Welcome to the Help page.</h1>
 
         <h3 id="help-title">Home</h3>
@@ -55,6 +56,7 @@ export default class Help extends Component {
         <p id="help-content">
           If you are done with your session, please logout using the icon appearing as a door with an arrow. This helps protect the security of the database information. Logging out ensures that no one can access the database when you leave your work station.
         </p>
+        </div>
       </>
     )
   }

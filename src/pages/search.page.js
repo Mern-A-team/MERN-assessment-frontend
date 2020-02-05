@@ -31,13 +31,13 @@ export default function Search(props) {
             allPhotos &&
             results.map(photo => (
               <div key={photo.name} className="card">
+                <img src={`${photo.fileRef}`} alt="" />
                 <Link key={photo.id} to={{ pathname: `/photo/${photo._id}` }}>
                   {photo.name}
                 </Link>
                 <img src="" alt="" />
-                <p id="categories">Categories: {photo.category.join(", ")}</p>
-                <p id="description">
-                  Description:{photo.description.substring(0, 25)}...
+                <p><span>Categories:</span> {photo.category.join(", ")}</p>
+                <p>Description: { photo.description.substring(0, 25)}...
                 </p>
               </div>
             ))}
@@ -46,10 +46,10 @@ export default function Search(props) {
             allPhotos &&
             allPhotos.map(photo => (
               <div key={photo.name} className="card">
+                <img src={`${photo.fileRef}`} alt="" />
                 <Link key={photo.id} to={{ pathname: `/photo/${photo._id}` }}>
                   {photo.name}
                 </Link>
-                <img src="" alt="" />
                 <p id="categories">Categories: {photo.category.join(", ")}</p>
                 <p id="description">
                   Description:{photo.description.substring(0, 25)}...

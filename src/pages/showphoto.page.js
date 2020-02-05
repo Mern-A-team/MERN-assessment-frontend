@@ -4,7 +4,10 @@ import SideNav from "../components/navigation/navbar.component";
 import StaticNav from "../components/navigation/staticnav.component";
 import "../styles/pages/showphoto.page.scss";
 
-import API from "../axios.config";
+import API from '../axios.config'
+import S3 from 'react-s3'
+import S3config from '../s3-config'
+
 
 export default function ShowPhoto(props) {
   const [data, setData] = useState();
@@ -16,9 +19,12 @@ export default function ShowPhoto(props) {
 
   const GetPhoto = () => {
     API.get(`/photos/${props.match.params.id}`, {})
-      .then(res => setData(res.data))
+      .then(res => {setData(res.data)
+      console.log(res.data.fileRef) }
+      )
       .catch(err => console.log(err));
   };
+
 
   return (
     <>
@@ -26,6 +32,8 @@ export default function ShowPhoto(props) {
       <StaticNav />
       {data && (
         <div id="showContainer">
+
+          <img id="photo" src={`${data.fileRef}`}/>
           <h2>{data.name}</h2>
           <p><span>ID Number:</span> {data.idNumber}</p>
           <p><span>Location:</span> {data.location}</p>
@@ -33,6 +41,7 @@ export default function ShowPhoto(props) {
           <p><span>Description:</span> {data.description}</p>
           {(props.userRole === "admin" || props.userRole === "volunteer") &&
               <Link
+                id="button"
                 to={{
                   pathname: `/photo/${props.match.params.id}/edit`,
                   state: {
@@ -43,6 +52,9 @@ export default function ShowPhoto(props) {
                 Edit
               </Link>
           }
+          <br/>
+          <br/>
+          <Link type="button" to={{pathname: `/search`}}>Back to photos</Link>
         </div>
       )}
     </>

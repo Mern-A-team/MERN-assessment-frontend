@@ -1,1 +1,11 @@
 @import '../main.scss';
+
+#container {
+    background-color: lightgray;
+    border-radius: 5px;
+    width: 80%;
+    margin: auto;
+    p {
+        padding-right: 20px;
+    }
+}

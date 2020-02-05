@@ -95,7 +95,9 @@ export default function Categories(props) {
       { confirmPrompt &&
       <p>{confirmPrompt}</p>
     }
-			<h1>Categories</h1>
+
+			<div id="container">
+			<h1>List of Categories</h1>
 			{props.userRole && props.userRole === 'admin' && (
 				<div id='buttonContainer'>
 					<button onClick={RenderAddCategory}>Add Category</button>
@@ -133,6 +135,7 @@ export default function Categories(props) {
           setConfirmPrompt={setConfirmPrompt}
 				/>
 			)}
+			</div>
 		</>
 	)
 }

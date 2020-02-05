@@ -15,7 +15,7 @@
            max-width: 400px;
            margin: 10px;
            padding: 15px;
-           background-color: rgb(218, 218, 218);
+           background-color: rgba(237, 237, 237, 0.557);
            border-radius: 5px;
            border: 1px solid black;
            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.582);
@@ -24,8 +24,12 @@
              text-align: center;
           }
           p {
-             margin: 5px 0px;
-             font-weight: bold;
+            margin: 5px 0px;
+            font-weight: bold;
+          }
+          img{
+            max-width: 40%;
+            margin: auto;
           }
         }
       }
