@@ -84,7 +84,7 @@ export default function EditPhotoForm(props) {
 					<p style={{color: "darkred"}}>{errMessage}</p>
 				}
 				<div className='fieldset'>
-					<label>Photo Name:</label>
+					<label>Photo Title:</label>
 					<input
 						type='text'
 						name='name'
@@ -133,7 +133,9 @@ export default function EditPhotoForm(props) {
 
 				<div className='fieldset'>
 					<SubmitButton />
-					<button onClick={DeletePhoto}>Delete</button>
+					{ props.userRole === "admin" &&
+						<button onClick={DeletePhoto}>Delete</button>
+					}
 				</div>
 			</form>
 		</div>
