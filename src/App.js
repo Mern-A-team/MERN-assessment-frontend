@@ -70,7 +70,7 @@ export default function App() {
             <Route exact path="/categories"
               render={ (props) => token ? <CategoriesPage {...props} userRole={userRole} /> : <Redirect to="/login" /> } />
             <Route exact path="/search"
-              render={ (props) => token ? <SearchPage {...props} /> : <Redirect to="/login" /> } />
+              render={ (props) => token ? <SearchPage {...props} setPromptMessage={setPromptMessage} promptMessage={promptMessage}/> : <Redirect to="/login" /> } />
             <Route exact path="/help"
               render={ (props) => token ? <HelpPage {...props} /> : <Redirect to="/login" /> } />
           </div>

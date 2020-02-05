@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchForm from "../components/forms/searchForm.component";
-
+import AuthPrompt from '../components/prompts/authorization.prompt.component'
 import SideNav from "../components/navigation/navbar.component";
 import "../styles/pages/search.page.scss";
 
@@ -25,6 +25,7 @@ export default function Search(props) {
     <>
       <SideNav />
       <div id="main">
+        <AuthPrompt setPromptMessage={props.setPromptMessage} promptMessage={props.promptMessage}/>
         <SearchForm results={results} setResults={setResults} allPhotos={allPhotos}/>
         <div id="resultsContainer">
           {results &&
