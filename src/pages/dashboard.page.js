@@ -18,7 +18,7 @@ export default function Dashboard(props) {
 		<>
 			<SideNav />
 			<AuthorizationPrompt {...props} />
-			<StaticNav />
+
       <div id="archivise-dash"><h1>ARCHIVISE</h1><h3>A photo database for the MacArthur Museum</h3></div>
 			<div id='dashboard-div'>
 				<h1>Welcome {props.userRole}</h1>
