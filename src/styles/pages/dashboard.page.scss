@@ -22,16 +22,16 @@
 			width: 80%;
 			height: 80vh;
 			margin: auto auto;
-			// margin-top: 100px;
 			background-color: map-get($theme-colors, 'nav-icon');
 			border-radius: 10px;
 
 			h1 {
-				font-size: 3rem;
+				font-size: 2rem;
 				text-align: center;
 				grid-column: 1/2;
 				width: 95%;
 				margin: auto;
+				color: black;
 			}
 			#dashboard-links {
 				grid-column: 1/2;

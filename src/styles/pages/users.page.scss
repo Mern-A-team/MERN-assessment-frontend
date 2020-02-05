@@ -1,1 +1,72 @@
 @import '../main.scss';
+
+#root {
+	div {
+		#buttonContainer {
+			padding: 50px;
+			display: flex;
+			justify-content: center;
+		}
+		#user-table {
+			border-collapse: collapse;
+			th,
+			tr,
+			td {
+				font-size: 1.4rem;
+				text-align: center;
+				border: 2px solid black;
+			}
+			border: 1px solid black;
+			width: 90%;
+			button {
+				margin: 10px;
+			}
+		}
+		button {
+			font-size: 1.5rem;
+			height: 40px;
+			width: auto;
+			margin: auto;
+			border-radius: 5px;
+		}
+		h1 {
+			color: map-get($theme-colors, 'nav-icon');
+			font-size: 4rem;
+			margin: 0;
+			text-align: center;
+		}
+		#user-page-main {
+			display: flex;
+			width: 100%;
+			display: flex;
+			justify-content: space-evenly;
+			#user-page-left {
+				h2 {
+					width: 100%;
+					text-align: center;
+				}
+				width: 40%;
+				height: auto;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: flex-start;
+				background-color: map-get($theme-colors, 'nav-icon');
+				border-radius: 5px;
+				padding: 15px;
+			}
+			#user-page-right {
+				h2 {
+					text-align: center;
+				}
+				width: 40%;
+				background-color: map-get($theme-colors, 'nav-icon');
+				border-radius: 5px;
+				padding: 15px;
+				p {
+					font-size: 1.2rem;
+				}
+			}
+		}
+	}
+}
