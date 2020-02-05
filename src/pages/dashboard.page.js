@@ -25,7 +25,7 @@ export default function Dashboard(props) {
 				<h1>Welcome {props.userRole}</h1>
 				<div id='dashboard-links'>
 					<h2>Quick Actions</h2>
-					{ !props.userRole === "guest" && 
+					{ props.userRole !== "guest" && 
 					<a href='/addphoto'>Upload a photo</a>
 					}
 					<a href='/categories'>Categories</a>
