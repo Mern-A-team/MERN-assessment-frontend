@@ -8,6 +8,7 @@ export default function Dashboard(props) {
 	const [currentImage, setCurrentImage] = useState('army-dudes')
 	const [imageCount, setImageCount] = useState(0)
 
+	// for the random images on the dashboard.
 	useEffect(() => {
 		let images = ['ladies', 'party', 'photography', 'army-dudes']
 		setCurrentImage(images[Math.floor(Math.random() * images.length)])

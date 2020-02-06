@@ -11,26 +11,28 @@ export default function Users(props) {
 	const [currentUser, setCurrentUser] = useState()
 	const [confirmPrompt, setConfirmPrompt] = useState()
 
+	// On mount, run CallUsers()
 	useEffect(() => {
 		CallUsers()
 	}, [])
 
-	useEffect(() => {
-		console.log(`these are the users: ${users}`)
-	}, [users])
-
+	// API call to find all the users.
 	const CallUsers = () => {
 		API.get('/user/', {})
+			// on resolution, set the users as the returned array of users.
 			.then(res => getUsers(res.data.users))
+			// on error, console.log the error.
 			.catch(err => console.log(err))
 	}
 
+	// clear any confirm prompts and setPopup to "add"
 	const RenderAddUser = () => {
 		let form = 'add'
 		setConfirmPrompt(null)
 		setPopup(form)
 	}
 
+	// clear any confirm prompts and setPopup to "edit", pass in the params for the specific user.
 	const RenderEditUser = event => {
 		event.preventDefault()
 		let current = event.target.value
@@ -40,12 +42,14 @@ export default function Users(props) {
 		setPopup(form)
 	}
 
+	// close the add prompt and refresh the users list.
 	const CloseAdd = () => {
 		let form = ''
 		setPopup(form)
 		CallUsers()
 	}
 
+	// close the edit prompt and refresh the users list.
 	const CloseEdit = () => {
 		let form = ''
 		setPopup(form)
@@ -55,9 +59,11 @@ export default function Users(props) {
 	return (
 		<>
 			<SideNav />
+			{/* Show a confirm frompt here. */}
 			{confirmPrompt && <p>{confirmPrompt}</p>}
 			<h1>Admin User Management</h1>
 			<div id='buttonContainer'>
+				{/* Render each popup depending on the popup variable. */}
 				{popup != 'add' && popup != 'edit' ? (
 					<button onClick={RenderAddUser}>Add User</button>
 				) : (
@@ -94,6 +100,8 @@ export default function Users(props) {
 						</table>
 					</div>
 					<div id='user-page-right'>
+
+						{/* Role information. */}
 						<h2>User Roles</h2>
 						<h3>Admin :</h3>
 						<p>
