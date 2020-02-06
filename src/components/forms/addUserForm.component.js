@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import "../../styles/components/forms/loginForm.style.scss";
 import "../../styles/components/forms/categoryForm.style.scss";
 import "../../styles/components/forms/userForm.style.scss";
@@ -26,7 +27,9 @@ export default function AddUserForm(props) {
 
   // sets the confirmation prompt via a function passed into props from the parent component, then unmounts the current component.
   const CloseAndPrompt = (res) => {
-    props.setConfirmPrompt(res.data)
+    props.setConfirmPrompt(res.data) //set this to null to test while in local host
+    // change axios config to local host 5000
+    // run backend in local environment 5000
     props.Close()
   }
 
@@ -64,6 +67,7 @@ export default function AddUserForm(props) {
 
         <div className="fieldset">
           <SubmitButton />
+          <button onClick={props.Close}>Back to User Dashboard</button>
         </div>
       </form>
 

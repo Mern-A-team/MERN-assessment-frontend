@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Link } from "react-router-dom";
+
 import CategoryFilters from './categoryFilters.component'
 import '../../styles/components/forms/loginForm.style.scss'
 
@@ -102,6 +104,7 @@ export default function EditCategoryForm(props) {
 				{savePrompt && 
 					<p>{savePrompt}</p>
 				}
+				<Link type="button" to={{pathname: `/search`}}>Back to photos</Link>
 			</form>
 		</div>
 	)
