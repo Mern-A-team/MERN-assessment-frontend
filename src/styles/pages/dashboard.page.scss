@@ -58,6 +58,9 @@
 
 				a {
 					font-size: 1.5rem;
+					text-decoration: none;
+					font-weight: bold;
+					color: navy;
 				}
 			}
 			#dashboard-images {
@@ -73,14 +76,15 @@
 				border-radius: 5px;
 				img {
 					width: 100%;
-					height: 100%;
+					// height: 100%;
 				}
 			}
 			#dashboard-count {
+				font-size: 1.2rem;
 				grid-column: 2/3;
 				grid-row: 1/2;
 				display: flex;
-				align-items: center;
+				align-items: flex-end;
 				justify-content: center;
 			}
 		}
