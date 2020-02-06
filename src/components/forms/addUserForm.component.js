@@ -67,12 +67,7 @@ export default function AddUserForm(props) {
         </div>
       </form>
 
-      <div id="roleInfoContainer">
-        <h3 className="divHeading" data-cy="roleInfoDivHeading">
-          Role Information
-        </h3>
-        <p>This is role information.</p>
-      </div>
+      
 
       {/* This is the button that closes the Add User Form Prompt. */}
       <button onClick={props.Close}>X</button>
