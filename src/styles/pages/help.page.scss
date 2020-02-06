@@ -7,22 +7,23 @@
     margin: auto;
     h1 {
         width: 80%;
-        text-align: center;
-        margin: auto;
+        color: black !important;
+        margin: auto !important;
         padding-top: 20px;
         padding-bottom: 30px;
     }
     p {
         width: 80%;
+        font-weight: lighter;
         margin: auto;
         padding-bottom: 20px;
 
     }
     h3 {
-        width: 80%;
+        width: 90%;
         margin: auto;
+        padding-top: 20px;
         padding-bottom: 10px;
-
     }
     
 }

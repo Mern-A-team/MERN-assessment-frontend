@@ -1,10 +1,23 @@
 @import '../main.scss';
 
-#delete {
-    font-size: 1.2rem;
-    height: 30px;
-    width: 70px;
-    margin: auto;
-    border-radius: 5px;
+#submitButton {
+    margin: auto !important;
+    margin-bottom: 15px !important;
 }
 
+#delete {
+    font-size: .8rem !important;
+    height: 30px;
+    width: 70px;
+    margin: auto !important;
+    border-radius: 5px;
+    background-color: rgb(242, 165, 165);
+}
+
+#backLink {
+    margin: auto;
+    text-decoration: none;
+    color: navy;
+    padding: 20px;
+    font-size: .9rem;
+}

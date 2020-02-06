@@ -135,9 +135,9 @@ export default function EditPhotoForm(props) {
 				<div className='fieldset'>
 					<SubmitButton />
 					{ props.userRole === "admin" &&
-						<button onClick={DeletePhoto}>Delete</button>
+						<button id="delete" onClick={DeletePhoto}>Delete</button>
 					}
-					<Link type="button" to={{pathname: `/photo/${props.location.state.data._id}`}}>Back to photo</Link>
+					<Link id="backLink" type="button" to={{pathname: `/photo/${props.location.state.data._id}`}}>Back to photo</Link>
 				</div>
 			</form>
 		</div>

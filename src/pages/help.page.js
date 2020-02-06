@@ -10,7 +10,7 @@ export default class Help extends Component {
         <SideNav />
         <StaticNav />
         <div id="bkground">
-        <h1>Welcome to the Help page.</h1>
+        <h1>Help Page</h1>
 
         <h3 id="help-title">Home</h3>
         <p id="help-content">
