@@ -119,7 +119,7 @@ export default function EditPhotoForm(props) {
 
 				<div className='fieldset'>
 					<label>Description:</label>
-					<input
+					<textarea
 						type='text'
 						name='description'
 						id='changeDescription'

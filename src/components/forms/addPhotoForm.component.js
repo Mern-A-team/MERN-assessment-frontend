@@ -79,7 +79,7 @@ export default function EditCategoryForm(props) {
 
 				<div className='fieldset'>
 					<label>Description:</label>
-					<input type='text' name='description' />
+					<textarea name='description' />
 				</div>
 
 				<div className='fieldset'>
