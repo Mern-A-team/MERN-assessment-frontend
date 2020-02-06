@@ -4,18 +4,22 @@
 	div {
 		#archivise-dash {
 			height: 15vh;
-			width: 80%;
-			margin: auto auto;
+			// margin: auto auto;
 			display: flex;
-			align-items: center;
+
+			// align-items: center;
 			h1 {
 				color: map-get($theme-colors, 'nav-icon');
 				font-size: 4rem;
 				margin: 0;
 				text-align: center;
+				width: 60%;
 			}
 			h3 {
 				color: map-get($theme-colors, 'nav-icon');
+				text-align: center;
+				width: 60%;
+				padding-top: 25px;
 			}
 		}
 		#dashboard-div {

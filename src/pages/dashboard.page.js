@@ -20,7 +20,10 @@ export default function Dashboard(props) {
 			<SideNav />
 			<AuthorizationPrompt {...props} />
 
-      <div id="archivise-dash"><h1>ARCHIVISE</h1><h3>A photo database for the MacArthur Museum</h3></div>
+      <div id="archivise-dash">
+		<h1>ARCHIVISE</h1>
+	  	<h3>A photo database for the MacArthur Museum</h3>
+	  </div>
 			<div id='dashboard-div'>
 				<h1>Welcome {props.userRole}</h1>
 				<div id='dashboard-links'>
@@ -28,8 +31,8 @@ export default function Dashboard(props) {
 					{ props.userRole !== "guest" && 
 					<a href='/addphoto'>Upload a Photo</a>
 					}
-					<a href='/categories'>Categories</a>
 					<a href='/search'>Search Images</a>
+					<a href='/categories'>Categories</a>
 					<a href='/help'>Help Page</a>
 				</div>
 				<h2 id='dashboard-count'>You have {imageCount} Images</h2>
