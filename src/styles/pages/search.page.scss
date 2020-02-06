@@ -7,6 +7,7 @@
       #resultsContainer {
          @include flex-r;
          flex-wrap: wrap;
+         margin-top: 20px;
         .card {
            @include flex-c;
            justify-content: center;

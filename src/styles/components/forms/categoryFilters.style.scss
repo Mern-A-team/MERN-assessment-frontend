@@ -4,6 +4,7 @@
    div {
       #searchContainer {
          @include flex-r;
+         margin-bottom: 20px;
          #searchInput {
             font-size: 1.2rem;
             padding: 5px;
@@ -12,12 +13,13 @@
             margin-right: 5px;
             border-radius: 5px;
          }
-         button {
-            font-size: 1.2rem;
-            padding: 5px;
-            border-radius: 5px;
-            min-width: 80px;
-         }
+         // button {
+         //    font-size: 1.2rem;
+         //    padding: 5px;
+         //    border-radius: 5px;
+         //    min-width: 80px;
+           
+         // }
       }
       div#tagContainer {
          display: flex;
@@ -50,13 +52,15 @@
          font-size: 1.2rem;
          border-radius: 5px;
          margin-top: 5px;
+         margin-bottom: 25px;
       }
       #filterTitle {
          font-size: 1.2rem;
          color: map-get($theme-colors , "light-grey" );
          padding: 0px;
-         margin: 0px;
+         margin: 5px 0px 10px 0;
          margin-top: 5px;
       }
    }
 }
+

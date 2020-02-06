@@ -72,7 +72,7 @@ export default function SearchFilters(props) {
       </div>
       <p id="filterTitle">Category Filters:</p>
       <CategoryFilters GetCategories={GetCategories} />
-      <button type="submit">Search</button>
+      <button id="searchButt" type="submit">Search</button>
     </form>
   );
 }
