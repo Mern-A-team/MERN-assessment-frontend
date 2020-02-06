@@ -10,6 +10,7 @@ export default function SideNav(props) {
    const [token] = useState(sessionStorage.getItem("token"))
    const [userRole] = useState(token ? decode(token).role : null)
 
+   // Logic to toggle extended navigation.
    function toggleNav() {
       function openNav() {
          document.getElementById("extendednav").style.left = "50px"
@@ -32,6 +33,7 @@ export default function SideNav(props) {
       } else { closeNav() }
    }
 
+   // Logout function.
    function clearToken() {
       if (sessionStorage.getItem("token")) {
       sessionStorage.removeItem("token")

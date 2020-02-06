@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import CategoryFilters from './categoryFilters.component'
 import '../../styles/components/forms/loginForm.style.scss'
@@ -136,6 +137,7 @@ export default function EditPhotoForm(props) {
 					{ props.userRole === "admin" &&
 						<button onClick={DeletePhoto}>Delete</button>
 					}
+					<Link type="button" to={{pathname: `/photo/${props.location.state.data._id}`}}>Back to photo</Link>
 				</div>
 			</form>
 		</div>

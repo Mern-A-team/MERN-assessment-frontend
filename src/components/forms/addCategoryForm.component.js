@@ -17,12 +17,13 @@ export default function AddCategoryForm(props) {
       name: event.target.name.value,
       parent: event.target.parent.value.trim()
     })
-    // on resolution, close the Add Category prompt, which also re-renders the data.
+    // on resolution, run the CloseAndPrompt function with the response message.
       .then(res => CloseAndPrompt(res.data.message))
     // on failure, set the errMessage variable.
       .catch(err => setErrMessage(err.response.data));
   };
 
+  // sets the confirmation prompt via a function passed into props from the parent component, then unmounts the current component.
   const CloseAndPrompt = (res) => {
     props.setConfirmPrompt(res)
     props.Close()

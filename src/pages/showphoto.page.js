@@ -5,8 +5,6 @@ import StaticNav from "../components/navigation/staticnav.component";
 import "../styles/pages/showphoto.page.scss";
 
 import API from '../axios.config'
-import S3 from 'react-s3'
-import S3config from '../s3-config'
 
 
 export default function ShowPhoto(props) {
@@ -17,6 +15,7 @@ export default function ShowPhoto(props) {
     // eslint-disable-next-line
   }, []);
 
+  // API call to get the photo and it's details.
   const GetPhoto = () => {
     API.get(`/photos/${props.match.params.id}`, {})
       .then(res => {setData(res.data)
