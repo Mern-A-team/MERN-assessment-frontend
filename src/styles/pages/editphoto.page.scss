@@ -21,3 +21,15 @@
     padding: 20px;
     font-size: .9rem;
 }
+
+#root {
+    div {
+        .formContainer form {
+            width: 600px !important;
+            textarea {
+                font-family: $fonts;
+                font-size: 1rem;
+            }
+        }
+    }   
+}

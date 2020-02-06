@@ -37,9 +37,9 @@ export default function Categories(props) {
 				} else {
 					// For each element that isn't top level, add a space by default and another for each level of indentation.
 					x.forEach((element, index) => {
-						let space = '\u00A0\u00A0'
+						let space = '\u00A0\u00A0\u00A0\u00A0'
 						for (let i = 0; i < level; i++) {
-							space += '\u00A0\u00A0'
+							space += '\u00A0\u00A0\u00A0\u00A0-\u00A0'
 						}
 						// Push the element name with the appropriate indentation.
 						options.push(`${space}${element.name}`)
@@ -111,6 +111,7 @@ export default function Categories(props) {
 						{cat}
 						{props.userRole === 'admin' ? (
 							<button
+								id="editButt"
 								onClick={RenderEditCategory}
 								value={cat}
 								key={i.toString()}
