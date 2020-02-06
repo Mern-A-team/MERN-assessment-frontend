@@ -17,7 +17,7 @@ export default function Search(props) {
 
   const PhotoIndex = () => {
     API.get("/photos/", {})
-      .then(res => setAllPhotos(res.data))
+      .then(res => setAllPhotos(res.data.reverse()))
       .catch(err => console.log(err));
   };
 
@@ -25,6 +25,7 @@ export default function Search(props) {
     <>
       <SideNav />
       <div id="main">
+        {/* Confirm save prompt and passing in the set message functions. */}
         <AuthPrompt setPromptMessage={props.setPromptMessage} promptMessage={props.promptMessage}/>
         <SearchForm results={results} setResults={setResults} allPhotos={allPhotos}/>
         <div id="resultsContainer">

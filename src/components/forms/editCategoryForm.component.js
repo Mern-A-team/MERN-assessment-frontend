@@ -14,15 +14,16 @@ export default function EditCategoryForm(props) {
     const [currentId, setCurrentId] = useState()
     const [errMessage, setErrMessage] = useState("");
 
+    // On mount, set the currently edited category fields.
     useEffect (() => {
         let editThis = data.find(obj => obj.name === props.current)
-        console.log(editThis)
         setCurrentName(editThis.name)
         setCurrentParent(editThis.parent)
         setCurrentId(editThis._id)
         // eslint-disable-next-line
     }, [])
 
+    // Logic to set the options for the dropdown but removing the currently edited element.
     const CreateOptions = () => {
         let newOptions = []
         console.log(newOptions)
@@ -33,12 +34,14 @@ export default function EditCategoryForm(props) {
         setOptions(newOptions)
     }
 
+    // When the current name is set, create the options.
     useEffect (() => {
         // eslint-disable-next-line
         CreateOptions()
         // eslint-disable-next-line
     }, [currentName])
 
+    // API call to update category.
     const UpdateCategory = event => {
         props.Close()
         event.preventDefault()
@@ -46,17 +49,23 @@ export default function EditCategoryForm(props) {
             name: event.target.name.value,
             parent: event.target.parent.value.trim()
         })
+        // on resolution, run the CloseAndPrompt function with the response message.
         .then(res => CloseAndPrompt(res) )
+        // on failure, set the errMessage variable.
         .catch(err => setErrMessage(err.response.data.errorMessage))  
     }
 
+    // API call to delete the category.
     const DeleteCategory = () => {
         props.Close()
         API.delete(`/categories/${currentId}`)
+        // on resolution, run the CloseAndPrompt function with the response message.
         .then(res => CloseAndPrompt(res))
+        // on failure, set the errMessage variable.
         .catch(err => setErrMessage(err.response.data.errorMessage))  
     }
 
+      // sets the confirmation prompt via a function passed into props from the parent component, then unmounts the current component.
     const CloseAndPrompt = (res) => {
         props.setConfirmPrompt(res.data.message)
         props.Close()

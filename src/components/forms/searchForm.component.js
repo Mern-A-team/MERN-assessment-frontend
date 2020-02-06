@@ -10,56 +10,54 @@ export default function SearchFilters(props) {
     setformcat(array);
   };
 
+  // SEARCH LOGIC
+
   const FindPhotos = event => {
     event.preventDefault()
+    // empty the results array.
     let resultsArray = []
+    // if search terms have been added to the input..
     if (event.target.searchInput.value.length >= 1) {
+      // set inputTerms as an array of each of the terms split and lowercase.
       let inputTerms = event.target.searchInput.value.toLowerCase().split(" ")
-      console.log(inputTerms)
-      console.log(`These are the form categories: ${formcat}`)
+        // for each term, for each photo, if the description includes the term, push it to the results array.
         inputTerms.forEach(term => {
-          console.log(`Now searching for ${term}`)
           props.allPhotos.forEach(photo => {
-            console.log(`Now searching in ${photo.name}`)
             if (photo.description.toLowerCase().includes(term)) {
               resultsArray.push(photo)
-              console.log(`${term} is included in ${photo.description}`)
             }
           });
         })
     } else {
       console.log("There are no input terms.")
     }
+    // if there are form category filters applied..
     if (formcat.length >= 1) {
+      // for each category...
       formcat.forEach(category => {
-        console.log(`Iterating through category: ${category}`)
+        // if there are already results, check through each to see if the category is included in it's categories.
+        // if it is, add it to the results array, if it isn't, remove it from the array.
         if (resultsArray.length >= 1) {
           resultsArray.forEach(result => {
-            console.log(`Searching in: ${result.name}`)
             if (!result.category.includes(category)) {
-              console.log(`${result} categories does not contain ${category}`)
               let index = resultsArray.indexOf(result)
-              console.log(`This is the index of ${result.name} in resultsArray`)
               resultsArray.splice(index, 1)
-              console.log("Removed.")
             }
           })
         }
         else {
-          console.log("Searching through all photos instead.")
+          // if there are no results, for each category, search through all photos instead.
           props.allPhotos.forEach(photo => {
             if (photo.category.includes(category)) {
-              console.log(`${photo} includes ${category}`)
               resultsArray.push(photo)
             }
           })
         }
       })
-      console.log("There are categories being passed through.")
     } else {
       console.log("There are no categories being passed in.")
     }
-    console.log(`Final Description Match Array: ${resultsArray}`)
+        // set the results as the results array.
         props.setResults(resultsArray)
   }
 
