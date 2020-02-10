@@ -32,7 +32,7 @@ export default function ShowPhoto(props) {
       {data && (
         <div id="showContainer">
 
-          <img id="photo" src={`${data.fileRef}`}/>
+          <img id="photo" src={`https://archivise.imgix.net/${data.fileName}?auto=compress&w=500&q=50`}/>
           <h2>{data.name}</h2>
           <p><span>ID Number:</span> {data.idNumber}</p>
           <p><span>Location:</span> {data.location}</p>
