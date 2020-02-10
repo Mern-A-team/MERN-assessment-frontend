@@ -5,12 +5,17 @@ import AuthorizationPrompt from '../components/prompts/authorization.prompt.comp
 import API from '../axios.config'
 
 export default function Dashboard(props) {
-	const [currentImage, setCurrentImage] = useState('army-dudes')
+	const [currentImage, setCurrentImage] = useState('army-dudes-min')
 	const [imageCount, setImageCount] = useState(0)
 
 	// for the random images on the dashboard.
 	useEffect(() => {
-		let images = ['ladies', 'party', 'photography', 'army-dudes']
+		let images = [
+			'ladies-min',
+			'party-min',
+			'photography-min',
+			'army-dudes-min'
+		]
 		setCurrentImage(images[Math.floor(Math.random() * images.length)])
 		API.get('/photos').then(res => setImageCount(res.data.length))
 	}, [])
@@ -20,17 +25,15 @@ export default function Dashboard(props) {
 			<SideNav />
 			<AuthorizationPrompt {...props} />
 
-      <div id="archivise-dash">
-		<h1>ARCHIVISE</h1>
-	  	<h3>A photo database for the MacArthur Museum</h3>
-	  </div>
+			<div id='archivise-dash'>
+				<h1>ARCHIVISE</h1>
+				<h3>A photo database for the MacArthur Museum</h3>
+			</div>
 			<div id='dashboard-div'>
 				<h1>Welcome {props.userRole}</h1>
 				<div id='dashboard-links'>
 					<h2>Quick Actions</h2>
-					{ props.userRole !== "guest" && 
-					<a href='/addphoto'>Upload a Photo</a>
-					}
+					{props.userRole !== 'guest' && <a href='/addphoto'>Upload a Photo</a>}
 					<a href='/search'>Search Images</a>
 					<a href='/categories'>Categories</a>
 					<a href='/help'>Help Page</a>
