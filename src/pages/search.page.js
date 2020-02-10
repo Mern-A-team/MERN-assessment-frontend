@@ -48,7 +48,7 @@ export default function Search(props) {
             allPhotos &&
             allPhotos.map(photo => (
               <div key={photo.name} className="card">
-                <img src={`${photo.fileRef}`} alt="" />
+                <img src={`https://archivise.imgix.net/${photo.fileName}?/w=300`} alt="" />
                 <Link key={photo.id} to={{ pathname: `/photo/${photo._id}` }}>
                   {photo.name}
                 </Link>
