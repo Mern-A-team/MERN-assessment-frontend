@@ -67,7 +67,7 @@ export default function EditUserForm(props) {
           <SubmitButton />
         </div>
         <div className="fieldset">
-          <button onClick={DeleteUser}>Delete</button>
+          <button id="deleteUser" onClick={DeleteUser}>Delete</button>
         </div>
       </form>
     </div>

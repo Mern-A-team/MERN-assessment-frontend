@@ -67,14 +67,14 @@ export default function AddUserForm(props) {
 
         <div className="fieldset">
           <SubmitButton />
-          <button onClick={props.Close}>Back to User Dashboard</button>
+          <button id="backButt" onClick={props.Close}>Back to User Dashboard</button>
         </div>
       </form>
 
       
 
       {/* This is the button that closes the Add User Form Prompt. */}
-      <button onClick={props.Close}>X</button>
+      {/* <button onClick={props.Close}>X</button> */}
     </div>
   );
 }
